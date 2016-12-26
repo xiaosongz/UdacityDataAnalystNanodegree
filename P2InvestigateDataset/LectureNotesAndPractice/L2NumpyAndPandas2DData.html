@@ -11770,7 +11770,7 @@ Pandas: Data Frame. <strong>I preffer this!</strong></p>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[126]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -12136,6 +12136,1189 @@ Pandas: Data Frame. <strong>I preffer this!</strong></p>
 <pre>1071.2</pre>
 </div>
 
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Pandas Data Frame Operations</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Subway ridership for 5 stations on 10 different days</span>
+<span class="n">ridership_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">[[</span>   <span class="mi">0</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">2</span><span class="p">,</span>    <span class="mi">5</span><span class="p">,</span>    <span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">1478</span><span class="p">,</span> <span class="mi">3877</span><span class="p">,</span> <span class="mi">3674</span><span class="p">,</span> <span class="mi">2328</span><span class="p">,</span> <span class="mi">2539</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">1613</span><span class="p">,</span> <span class="mi">4088</span><span class="p">,</span> <span class="mi">3991</span><span class="p">,</span> <span class="mi">6461</span><span class="p">,</span> <span class="mi">2691</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">1560</span><span class="p">,</span> <span class="mi">3392</span><span class="p">,</span> <span class="mi">3826</span><span class="p">,</span> <span class="mi">4787</span><span class="p">,</span> <span class="mi">2613</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">1608</span><span class="p">,</span> <span class="mi">4802</span><span class="p">,</span> <span class="mi">3932</span><span class="p">,</span> <span class="mi">4477</span><span class="p">,</span> <span class="mi">2705</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">1576</span><span class="p">,</span> <span class="mi">3933</span><span class="p">,</span> <span class="mi">3909</span><span class="p">,</span> <span class="mi">4979</span><span class="p">,</span> <span class="mi">2685</span><span class="p">],</span>
+          <span class="p">[</span>  <span class="mi">95</span><span class="p">,</span>  <span class="mi">229</span><span class="p">,</span>  <span class="mi">255</span><span class="p">,</span>  <span class="mi">496</span><span class="p">,</span>  <span class="mi">201</span><span class="p">],</span>
+          <span class="p">[</span>   <span class="mi">2</span><span class="p">,</span>    <span class="mi">0</span><span class="p">,</span>    <span class="mi">1</span><span class="p">,</span>   <span class="mi">27</span><span class="p">,</span>    <span class="mi">0</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">1438</span><span class="p">,</span> <span class="mi">3785</span><span class="p">,</span> <span class="mi">3589</span><span class="p">,</span> <span class="mi">4174</span><span class="p">,</span> <span class="mi">2215</span><span class="p">],</span>
+          <span class="p">[</span><span class="mi">1342</span><span class="p">,</span> <span class="mi">4043</span><span class="p">,</span> <span class="mi">4009</span><span class="p">,</span> <span class="mi">4665</span><span class="p">,</span> <span class="mi">3033</span><span class="p">]],</span>
+    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;05-01-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-02-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-03-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-04-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-05-11&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;05-06-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-07-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-08-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-09-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-10-11&#39;</span><span class="p">],</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;R003&#39;</span><span class="p">,</span> <span class="s1">&#39;R004&#39;</span><span class="p">,</span> <span class="s1">&#39;R005&#39;</span><span class="p">,</span> <span class="s1">&#39;R006&#39;</span><span class="p">,</span> <span class="s1">&#39;R007&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Change False to True for each block of code to see what it does</span>
+
+<span class="c1"># DataFrame creation</span>
+<span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="c1"># You can create a DataFrame out of a dictionary mapping column names to values</span>
+    <span class="n">df_1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]})</span>
+    <span class="k">print</span> <span class="n">df_1</span>
+
+    <span class="c1"># You can also use a list of lists or a 2D NumPy array</span>
+    <span class="n">df_2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]],</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">])</span>
+    <span class="k">print</span> <span class="n">df_2</span>
+   
+
+<span class="c1"># Accessing elements</span>
+<span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">ridership_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="k">print</span> <span class="n">ridership_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s1">&#39;05-05-11&#39;</span><span class="p">]</span>
+    <span class="k">print</span> <span class="n">ridership_df</span><span class="p">[</span><span class="s1">&#39;R003&#39;</span><span class="p">]</span>
+    <span class="k">print</span> <span class="n">ridership_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+    
+<span class="c1"># Accessing multiple rows</span>
+<span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">ridership_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+    
+<span class="c1"># Accessing multiple columns</span>
+<span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">ridership_df</span><span class="p">[[</span><span class="s1">&#39;R003&#39;</span><span class="p">,</span> <span class="s1">&#39;R005&#39;</span><span class="p">]]</span>
+    
+<span class="c1"># Pandas axis</span>
+<span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]})</span>
+    <span class="k">print</span> <span class="n">df</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="k">print</span> <span class="n">df</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">mean_riders_for_max_station</span><span class="p">(</span><span class="n">ridership</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Fill in this function to find the station with the maximum riders on the</span>
+<span class="sd">    first day, then return the mean riders per day for that station. Also</span>
+<span class="sd">    return the mean ridership overall for comparsion.</span>
+<span class="sd">    </span>
+<span class="sd">    This is the same as a previous exercise, but this time the</span>
+<span class="sd">    input is a Pandas DataFrame rather than a 2D NumPy array.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">overall_mean</span> <span class="o">=</span> <span class="n">ridership_df</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="c1"># Replace this with your code</span>
+    <span class="n">mean_for_max</span> <span class="o">=</span> <span class="n">ridership_df</span><span class="p">[</span><span class="n">ridership_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,]</span><span class="o">.</span><span class="n">argmax</span><span class="p">()]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="c1"># Replace this with your code</span>
+    
+    <span class="k">return</span> <span class="p">(</span><span class="n">overall_mean</span><span class="p">,</span> <span class="n">mean_for_max</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">ridership_df</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[44]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>2342.5999999999999</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">ridership_df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,]</span><span class="o">.</span><span class="n">argmax</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[51]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;R006&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">mean_riders_for_max_station</span><span class="p">(</span><span class="n">ridership_df</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[61]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(2342.5999999999999, 3239.9000000000001)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">ridership_df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[67]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>R003</th>
+      <th>R004</th>
+      <th>R005</th>
+      <th>R006</th>
+      <th>R007</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>10.000000</td>
+      <td>10.000000</td>
+      <td>10.000000</td>
+      <td>10.00000</td>
+      <td>10.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>1071.200000</td>
+      <td>2814.900000</td>
+      <td>2718.800000</td>
+      <td>3239.90000</td>
+      <td>1868.200000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>722.067679</td>
+      <td>1922.501984</td>
+      <td>1822.843798</td>
+      <td>2342.24951</td>
+      <td>1259.895216</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>5.00000</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>406.750000</td>
+      <td>1019.750000</td>
+      <td>1088.500000</td>
+      <td>954.00000</td>
+      <td>704.500000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>1458.000000</td>
+      <td>3831.000000</td>
+      <td>3750.000000</td>
+      <td>4325.50000</td>
+      <td>2576.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>1572.000000</td>
+      <td>4015.500000</td>
+      <td>3926.250000</td>
+      <td>4756.50000</td>
+      <td>2689.500000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>1613.000000</td>
+      <td>4802.000000</td>
+      <td>4009.000000</td>
+      <td>6461.00000</td>
+      <td>3033.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Calculate Person's r using Pandas<br>
+$r = \dfrac{SSR}{SSTO}$<br></p>
+<p>Where :</p>
+<p>$SSR = \Sigma(\hat{y}_i - \bar{y})$ and $SSTO = \Sigma(y_i - \bar{y})$<br></p>
+<p>$\beta_1= \Sigma_{i=0}^{n}\dfrac{(x_i - \bar{x})\cdot(y_i - \bar{y})}{(x_i - \bar{x})^2}$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[80]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;nyc_subway_weather.csv&#39;</span>
+<span class="n">subway_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+
+<span class="n">entries</span> <span class="o">=</span> <span class="n">subway_df</span><span class="p">[</span><span class="s1">&#39;ENTRIESn_hourly&#39;</span><span class="p">]</span>
+<span class="n">cum_entries</span> <span class="o">=</span> <span class="n">subway_df</span><span class="p">[</span><span class="s1">&#39;ENTRIESn&#39;</span><span class="p">]</span>
+<span class="n">rain</span> <span class="o">=</span> <span class="n">subway_df</span><span class="p">[</span><span class="s1">&#39;meanprecipi&#39;</span><span class="p">]</span>
+<span class="n">temp</span> <span class="o">=</span> <span class="n">subway_df</span><span class="p">[</span><span class="s1">&#39;meantempi&#39;</span><span class="p">]</span>
+
+<span class="k">print</span> <span class="n">correlation</span><span class="p">(</span><span class="n">entries</span><span class="p">,</span> <span class="n">rain</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">correlation</span><span class="p">(</span><span class="n">entries</span><span class="p">,</span> <span class="n">temp</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">correlation</span><span class="p">(</span><span class="n">rain</span><span class="p">,</span> <span class="n">temp</span><span class="p">)</span>
+
+<span class="k">print</span> <span class="n">correlation</span><span class="p">(</span><span class="n">entries</span><span class="p">,</span> <span class="n">cum_entries</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.0356485157722
+-0.0266933483216
+-0.229034323408
+0.585895470766
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">correlation</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Fill in this function to compute the correlation between the two</span>
+<span class="sd">    input variables. Each input is either a NumPy array or a Pandas</span>
+<span class="sd">    Series.</span>
+<span class="sd">    </span>
+<span class="sd">    correlation = average of (x in standard units) times (y in standard units)</span>
+<span class="sd">    </span>
+<span class="sd">    Remember to pass the argument &quot;ddof=0&quot; to the Pandas std() function!</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="k">def</span> <span class="nf">stdiz</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="n">stdiz</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">/</span><span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span> <span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">stdiz</span>
+    <span class="n">correlation</span> <span class="o">=</span> <span class="n">stdiz</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">stdiz</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">())</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">correlation</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Quiz:-DataFrame-Vectorized-Operations">Quiz: DataFrame Vectorized Operations<a class="anchor-link" href="#Quiz:-DataFrame-Vectorized-Operations">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Examples of vectorized operations on DataFrames:</span>
+<span class="c1"># Change False to True for each block of code to see what it does</span>
+
+<span class="c1"># Adding DataFrames with the column names</span>
+<span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]})</span>
+    <span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">],</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">90</span><span class="p">]})</span>
+    <span class="k">print</span> <span class="n">df1</span> <span class="o">+</span> <span class="n">df2</span>
+    
+<span class="c1"># Adding DataFrames with overlapping column names </span>
+<span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]})</span>
+    <span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">90</span><span class="p">]})</span>
+    <span class="k">print</span> <span class="n">df1</span> <span class="o">+</span> <span class="n">df2</span>
+
+<span class="c1"># Adding DataFrames with overlapping row indexes</span>
+<span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="n">df1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]},</span>
+                       <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;row1&#39;</span><span class="p">,</span> <span class="s1">&#39;row2&#39;</span><span class="p">,</span> <span class="s1">&#39;row3&#39;</span><span class="p">])</span>
+    <span class="n">df2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">],</span> <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">90</span><span class="p">]},</span>
+                       <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;row4&#39;</span><span class="p">,</span> <span class="s1">&#39;row3&#39;</span><span class="p">,</span> <span class="s1">&#39;row2&#39;</span><span class="p">])</span>
+    <span class="k">print</span> <span class="n">df1</span> <span class="o">+</span> <span class="n">df2</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># --- Quiz ---</span>
+<span class="c1"># Cumulative entries and exits for one station for a few hours.</span>
+<span class="n">entries_and_exits</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;ENTRIESn&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3144312</span><span class="p">,</span> <span class="mi">3144335</span><span class="p">,</span> <span class="mi">3144353</span><span class="p">,</span> <span class="mi">3144424</span><span class="p">,</span> <span class="mi">3144594</span><span class="p">,</span>
+                 <span class="mi">3144808</span><span class="p">,</span> <span class="mi">3144895</span><span class="p">,</span> <span class="mi">3144905</span><span class="p">,</span> <span class="mi">3144941</span><span class="p">,</span> <span class="mi">3145094</span><span class="p">],</span>
+    <span class="s1">&#39;EXITSn&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1088151</span><span class="p">,</span> <span class="mi">1088159</span><span class="p">,</span> <span class="mi">1088177</span><span class="p">,</span> <span class="mi">1088231</span><span class="p">,</span> <span class="mi">1088275</span><span class="p">,</span>
+               <span class="mi">1088317</span><span class="p">,</span> <span class="mi">1088328</span><span class="p">,</span> <span class="mi">1088331</span><span class="p">,</span> <span class="mi">1088420</span><span class="p">,</span> <span class="mi">1088753</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="k">def</span> <span class="nf">get_hourly_entries_and_exits</span><span class="p">(</span><span class="n">entries_and_exits</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Fill in this function to take a DataFrame with cumulative entries</span>
+<span class="sd">    and exits (entries in the first column, exits in the second) and</span>
+<span class="sd">    return a DataFrame with hourly entries and exits (entries in the</span>
+<span class="sd">    first column, exits in the second).</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">entries_and_exits</span><span class="o">.</span><span class="n">shift</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Quiz:-DataFrame-Applymap()">Quiz: DataFrame Applymap()<a class="anchor-link" href="#Quiz:-DataFrame-Applymap()">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[93]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Change False to True for this block of code to see what it does</span>
+
+<span class="c1"># DataFrame applymap()</span>
+<span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+        <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span>
+        <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+    <span class="p">})</span>
+    
+    <span class="k">def</span> <span class="nf">add_one</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+        
+    <span class="k">print</span> <span class="n">df</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="n">add_one</span><span class="p">)</span>
+    
+<span class="n">grades_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;exam1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">43</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">87</span><span class="p">],</span>
+          <span class="s1">&#39;exam2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">24</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">60</span><span class="p">]},</span>
+    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Andre&#39;</span><span class="p">,</span> <span class="s1">&#39;Barry&#39;</span><span class="p">,</span> <span class="s1">&#39;Chris&#39;</span><span class="p">,</span> <span class="s1">&#39;Dan&#39;</span><span class="p">,</span> <span class="s1">&#39;Emilio&#39;</span><span class="p">,</span> 
+           <span class="s1">&#39;Fred&#39;</span><span class="p">,</span> <span class="s1">&#39;Greta&#39;</span><span class="p">,</span> <span class="s1">&#39;Humbert&#39;</span><span class="p">,</span> <span class="s1">&#39;Ivan&#39;</span><span class="p">,</span> <span class="s1">&#39;James&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[94]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">convert_grade</span><span class="p">(</span><span class="n">grade</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">grade</span> <span class="o">&gt;=</span> <span class="mi">90</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;A&#39;</span>
+    <span class="k">elif</span> <span class="n">grade</span> <span class="o">&gt;=</span> <span class="mi">80</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;B&#39;</span>
+    <span class="k">elif</span> <span class="n">grade</span> <span class="o">&gt;=</span> <span class="mi">70</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;C&#39;</span>
+    <span class="k">elif</span> <span class="n">grade</span> <span class="o">&gt;=</span> <span class="mi">60</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;D&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;F&#39;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[95]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">convert_grades</span><span class="p">(</span><span class="n">grades</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Fill in this function to convert the given DataFrame of numerical</span>
+<span class="sd">    grades to letter grades. Return a new DataFrame with the converted</span>
+<span class="sd">    grade.</span>
+<span class="sd">    </span>
+<span class="sd">    The conversion rule is:</span>
+<span class="sd">        90-100 -&gt; A</span>
+<span class="sd">        80-89  -&gt; B</span>
+<span class="sd">        70-79  -&gt; C</span>
+<span class="sd">        60-69  -&gt; D</span>
+<span class="sd">        0-59   -&gt; F</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">grades</span><span class="o">.</span><span class="n">applymap</span><span class="p">(</span><span class="n">convert_grade</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[96]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">convert_grades</span><span class="p">(</span><span class="n">grades_df</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[96]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>exam1</th>
+      <th>exam2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Andre</th>
+      <td>F</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <th>Barry</th>
+      <td>B</td>
+      <td>D</td>
+    </tr>
+    <tr>
+      <th>Chris</th>
+      <td>C</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <th>Dan</th>
+      <td>C</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <th>Emilio</th>
+      <td>B</td>
+      <td>D</td>
+    </tr>
+    <tr>
+      <th>Fred</th>
+      <td>C</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <th>Greta</th>
+      <td>A</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>Humbert</th>
+      <td>D</td>
+      <td>F</td>
+    </tr>
+    <tr>
+      <th>Ivan</th>
+      <td>A</td>
+      <td>C</td>
+    </tr>
+    <tr>
+      <th>James</th>
+      <td>B</td>
+      <td>D</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Quiz:-DataFrame-Apply()">Quiz: DataFrame Apply()<a class="anchor-link" href="#Quiz:-DataFrame-Apply()">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[98]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">grades_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;exam1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">43</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">87</span><span class="p">],</span>
+          <span class="s1">&#39;exam2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">24</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">60</span><span class="p">]},</span>
+    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Andre&#39;</span><span class="p">,</span> <span class="s1">&#39;Barry&#39;</span><span class="p">,</span> <span class="s1">&#39;Chris&#39;</span><span class="p">,</span> <span class="s1">&#39;Dan&#39;</span><span class="p">,</span> <span class="s1">&#39;Emilio&#39;</span><span class="p">,</span> 
+           <span class="s1">&#39;Fred&#39;</span><span class="p">,</span> <span class="s1">&#39;Greta&#39;</span><span class="p">,</span> <span class="s1">&#39;Humbert&#39;</span><span class="p">,</span> <span class="s1">&#39;Ivan&#39;</span><span class="p">,</span> <span class="s1">&#39;James&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Change False to True for this block of code to see what it does</span>
+
+<span class="c1"># DataFrame apply()</span>
+<span class="k">if</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">convert_grades_curve</span><span class="p">(</span><span class="n">exam_grades</span><span class="p">):</span>
+        <span class="c1"># Pandas has a bult-in function that will perform this calculation</span>
+        <span class="c1"># This will give the bottom 0% to 10% of students the grade &#39;F&#39;,</span>
+        <span class="c1"># 10% to 20% the grade &#39;D&#39;, and so on. You can read more about</span>
+        <span class="c1"># the qcut() function here:</span>
+        <span class="c1"># http://pandas.pydata.org/pandas-docs/stable/generated/pandas.qcut.html</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">exam_grades</span><span class="p">,</span>
+                       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                       <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">])</span>
+        
+    <span class="c1"># qcut() operates on a list, array, or Series. This is the</span>
+    <span class="c1"># result of running the function on a single column of the</span>
+    <span class="c1"># DataFrame.</span>
+    <span class="k">print</span> <span class="n">convert_grades_curve</span><span class="p">(</span><span class="n">grades_df</span><span class="p">[</span><span class="s1">&#39;exam1&#39;</span><span class="p">])</span>
+    
+    <span class="c1"># qcut() does not work on DataFrames, but we can use apply()</span>
+    <span class="c1"># to call the function on each column separately</span>
+    <span class="k">print</span> <span class="n">grades_df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">convert_grades_curve</span><span class="p">)</span>
+    
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Andre      F
+Barry      B
+Chris      C
+Dan        C
+Emilio     B
+Fred       C
+Greta      A
+Humbert    D
+Ivan       A
+James      B
+Name: exam1, dtype: category
+Categories (5, object): [F &lt; D &lt; C &lt; B &lt; A]
+        exam1 exam2
+Andre       F     F
+Barry       B     B
+Chris       C     C
+Dan         C     C
+Emilio      B     B
+Fred        C     C
+Greta       A     A
+Humbert     D     D
+Ivan        A     A
+James       B     B
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[99]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">standardize</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Fill in this function to standardize each column of the given</span>
+<span class="sd">    DataFrame. To standardize a variable, convert each value to the</span>
+<span class="sd">    number of standard deviations it is above or below the mean.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">stdiz</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+        <span class="n">stdiz</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">/</span><span class="n">x</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span> <span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">stdiz</span>
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">stdiz</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[100]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">standardize</span><span class="p">(</span><span class="n">grades_df</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[100]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>exam1</th>
+      <th>exam2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Andre</th>
+      <td>-2.315341</td>
+      <td>-2.304599</td>
+    </tr>
+    <tr>
+      <th>Barry</th>
+      <td>0.220191</td>
+      <td>0.386400</td>
+    </tr>
+    <tr>
+      <th>Chris</th>
+      <td>0.020017</td>
+      <td>-0.096600</td>
+    </tr>
+    <tr>
+      <th>Dan</th>
+      <td>-0.180156</td>
+      <td>-0.096600</td>
+    </tr>
+    <tr>
+      <th>Emilio</th>
+      <td>0.753987</td>
+      <td>0.662400</td>
+    </tr>
+    <tr>
+      <th>Fred</th>
+      <td>-0.513779</td>
+      <td>-0.441600</td>
+    </tr>
+    <tr>
+      <th>Greta</th>
+      <td>0.887436</td>
+      <td>1.490400</td>
+    </tr>
+    <tr>
+      <th>Humbert</th>
+      <td>-0.847401</td>
+      <td>-0.786600</td>
+    </tr>
+    <tr>
+      <th>Ivan</th>
+      <td>1.354508</td>
+      <td>1.007400</td>
+    </tr>
+    <tr>
+      <th>James</th>
+      <td>0.620538</td>
+      <td>0.179400</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="DataFrame-Apply()-Use-Case-2">DataFrame Apply() Use Case 2<a class="anchor-link" href="#DataFrame-Apply()-Use-Case-2">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[135]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+    <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span>
+    <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="c1"># Change False to True for this block of code to see what it does</span>
+
+<span class="c1"># DataFrame apply() - use case 2</span>
+<span class="k">if</span> <span class="bp">True</span><span class="p">:</span>   
+    <span class="k">print</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+    
+<span class="k">def</span> <span class="nf">second_largest</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Fill in this function to return the second-largest value of each </span>
+<span class="sd">    column of the input DataFrame.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="nf">seccol</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
+        <span class="n">sc</span> <span class="o">=</span> <span class="n">col</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sc</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">seccol</span><span class="p">)</span>
+<span class="k">print</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="s1">&#39;second_largest for each column in df: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">second_largest</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>a     3.0
+b    30.0
+c    15.0
+dtype: float64
+a     5
+b    50
+c    25
+dtype: int64
+
+second_largest for each column in df: 
+a     4
+b    40
+c    20
+dtype: int64
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Quiz:-Adding-A-DataFrame-To-A-Series">Quiz: Adding A DataFrame To A Series<a class="anchor-link" href="#Quiz:-Adding-A-DataFrame-To-A-Series">&#182;</a></h4><p>Adding when DataFrame column names match Series index--- correct way to add!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[140]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Change False to True for each block of code to see what it does</span>
+
+<span class="c1"># Adding a Series to a square DataFrame</span>
+<span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">],</span>
+        <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">],</span>
+        <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">120</span><span class="p">],</span>
+        <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="mi">130</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">160</span><span class="p">]</span>
+    <span class="p">})</span>
+    
+    <span class="k">print</span> <span class="n">df</span>
+    <span class="k">print</span> <span class="s1">&#39;&#39;</span> <span class="c1"># Create a blank line between outputs</span>
+    <span class="k">print</span> <span class="n">df</span> <span class="o">+</span> <span class="n">s</span>
+    
+<span class="c1"># Adding a Series to a one-row DataFrame </span>
+<span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">20</span><span class="p">],</span> <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">30</span><span class="p">],</span> <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="mi">40</span><span class="p">]})</span>
+    
+    <span class="k">print</span> <span class="n">df</span>
+    <span class="k">print</span> <span class="s1">&#39;&#39;</span> <span class="c1"># Create a blank line between outputs</span>
+    <span class="k">print</span> <span class="n">df</span> <span class="o">+</span> <span class="n">s</span>
+
+<span class="c1"># Adding a Series to a one-column DataFrame</span>
+<span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">]})</span>
+    
+    <span class="k">print</span> <span class="n">df</span>
+    <span class="k">print</span> <span class="s1">&#39;&#39;</span> <span class="c1"># Create a blank line between outputs</span>
+    <span class="k">print</span> <span class="n">df</span> <span class="o">+</span> <span class="n">s</span>
+    
+
+    
+<span class="c1"># Adding when DataFrame column names match Series index</span>
+<span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">],</span>
+        <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">],</span>
+        <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">120</span><span class="p">],</span>
+        <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">130</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">160</span><span class="p">]</span>
+    <span class="p">})</span>
+    
+    <span class="k">print</span> <span class="n">df</span>
+    <span class="k">print</span> <span class="s1">&#39;&#39;</span> <span class="c1"># Create a blank line between outputs</span>
+    <span class="k">print</span> <span class="n">df</span> <span class="o">+</span> <span class="n">s</span>
+    
+<span class="c1"># Adding when DataFrame column names don&#39;t match Series index</span>
+<span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">],</span>
+        <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">],</span>
+        <span class="s1">&#39;c&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">120</span><span class="p">],</span>
+        <span class="s1">&#39;d&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">130</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">160</span><span class="p">]</span>
+    <span class="p">})</span>
+    
+    <span class="k">print</span> <span class="n">df</span>
+    <span class="k">print</span> <span class="s1">&#39;&#39;</span> <span class="c1"># Create a blank line between outputs</span>
+    <span class="k">print</span> <span class="n">df</span> <span class="o">+</span> <span class="n">s</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Quiz:-Standardizing-Each-Column-Again">Quiz: Standardizing Each Column Again<a class="anchor-link" href="#Quiz:-Standardizing-Each-Column-Again">&#182;</a></h4><p>Note: In order to get the proper computations, we should actually be setting the value of the "ddof" parameter to 0 in the .std() function.</p>
+<p>Note that the type of standard deviation calculated by default is different between numpy's .std() and pandas' .std() functions. By default, numpy calculates a population standard deviation, with "ddof = 0". On the other hand, pandas calculates a sample standard deviation, with "ddof = 1". If we know all of the scores, then we have a population - so to standardize using pandas, we need to set "ddof = 0".</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[143]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Adding using +</span>
+<span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">],</span>
+        <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">],</span>
+        <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">120</span><span class="p">],</span>
+        <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="mi">130</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">160</span><span class="p">]</span>
+    <span class="p">})</span>
+    
+    <span class="k">print</span> <span class="n">df</span>
+    <span class="k">print</span> <span class="s1">&#39;&#39;</span> <span class="c1"># Create a blank line between outputs</span>
+    <span class="k">print</span> <span class="n">df</span> <span class="o">+</span> <span class="n">s</span>
+    
+<span class="c1"># Adding with axis=&#39;index&#39;</span>
+<span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">],</span>
+        <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">],</span>
+        <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">120</span><span class="p">],</span>
+        <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="mi">130</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">160</span><span class="p">]</span>
+    <span class="p">})</span>
+    
+    <span class="k">print</span> <span class="n">df</span>
+    <span class="k">print</span> <span class="s1">&#39;&#39;</span> <span class="c1"># Create a blank line between outputs</span>
+    <span class="k">print</span> <span class="n">df</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;index&#39;</span><span class="p">)</span>
+    <span class="c1"># The functions sub(), mul(), and div() work similarly to add()</span>
+    
+<span class="c1"># Adding with axis=&#39;columns&#39;</span>
+<span class="k">if</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="mi">0</span><span class="p">:</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">],</span>
+        <span class="mi">1</span><span class="p">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">80</span><span class="p">],</span>
+        <span class="mi">2</span><span class="p">:</span> <span class="p">[</span><span class="mi">90</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">120</span><span class="p">],</span>
+        <span class="mi">3</span><span class="p">:</span> <span class="p">[</span><span class="mi">130</span><span class="p">,</span> <span class="mi">140</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">160</span><span class="p">]</span>
+    <span class="p">})</span>
+    
+    <span class="k">print</span> <span class="n">df</span>
+    <span class="k">print</span> <span class="s1">&#39;&#39;</span> <span class="c1"># Create a blank line between outputs</span>
+    <span class="k">print</span> <span class="n">df</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="s1">&#39;columns&#39;</span><span class="p">)</span>
+    <span class="c1"># The functions sub(), mul(), and div() work similarly to add()</span>
+    
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>    0   1    2    3
+0  10  50   90  130
+1  20  60  100  140
+2  30  70  110  150
+3  40  80  120  160
+
+    0   1    2    3
+0  11  52   93  134
+1  21  62  103  144
+2  31  72  113  154
+3  41  82  123  164
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Standarization:</p>
+<p>$z = \dfrac{x_i - \bar{x}}{s}$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[176]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">grades_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;exam1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">43</span><span class="p">,</span> <span class="mi">81</span><span class="p">,</span> <span class="mi">78</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">89</span><span class="p">,</span> <span class="mi">70</span><span class="p">,</span> <span class="mi">91</span><span class="p">,</span> <span class="mi">65</span><span class="p">,</span> <span class="mi">98</span><span class="p">,</span> <span class="mi">87</span><span class="p">],</span>
+          <span class="s1">&#39;exam2&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">24</span><span class="p">,</span> <span class="mi">63</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">56</span><span class="p">,</span> <span class="mi">67</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">79</span><span class="p">,</span> <span class="mi">46</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">60</span><span class="p">]},</span>
+    <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Andre&#39;</span><span class="p">,</span> <span class="s1">&#39;Barry&#39;</span><span class="p">,</span> <span class="s1">&#39;Chris&#39;</span><span class="p">,</span> <span class="s1">&#39;Dan&#39;</span><span class="p">,</span> <span class="s1">&#39;Emilio&#39;</span><span class="p">,</span> 
+           <span class="s1">&#39;Fred&#39;</span><span class="p">,</span> <span class="s1">&#39;Greta&#39;</span><span class="p">,</span> <span class="s1">&#39;Humbert&#39;</span><span class="p">,</span> <span class="s1">&#39;Ivan&#39;</span><span class="p">,</span> <span class="s1">&#39;James&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">standardize</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Fill in this function to standardize each column of the given</span>
+<span class="sd">    DataFrame. To standardize a variable, convert each value to the</span>
+<span class="sd">    number of standard deviations it is above or below the mean.</span>
+<span class="sd">    </span>
+<span class="sd">    This time, try to use vectorized operations instead of apply().</span>
+<span class="sd">    You should get the same results as you did before.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">std</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">ddof</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">stded</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span><span class="o">/</span><span class="n">std</span>
+    <span class="k">return</span> <span class="n">stded</span>
+
+<span class="k">def</span> <span class="nf">standardize_rows</span><span class="p">(</span><span class="n">df</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Optional: Fill in this function to standardize each row of the given</span>
+<span class="sd">    DataFrame. Again, try not to use apply().</span>
+<span class="sd">    </span>
+<span class="sd">    This one is more challenging than standardizing each column!</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">mean</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">std</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ddof</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">stded</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span><span class="o">/</span><span class="n">std</span>
+    <span class="k">return</span> <span class="n">stded</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[174]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">mean</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">std</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span> <span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">stded</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span> <span class="o">-</span> <span class="n">mean</span><span class="p">)</span><span class="o">/</span><span class="n">std</span>
+<span class="k">print</span> <span class="n">stded</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>          0         1         2         3
+0 -1.161895 -1.161895 -1.161895 -1.161895
+1 -0.387298 -0.387298 -0.387298 -0.387298
+2  0.387298  0.387298  0.387298  0.387298
+3  1.161895  1.161895  1.161895  1.161895
+</pre>
+</div>
 </div>
 
 </div>
