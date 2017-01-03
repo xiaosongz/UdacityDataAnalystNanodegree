@@ -13325,6 +13325,2480 @@ dtype: int64
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Quiz():-Use-Pandas-Groupby()-function:">Quiz(): Use Pandas Groupby() function:<a class="anchor-link" href="#Quiz():-Use-Pandas-Groupby()-function:">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[183]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
+
+<span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">example_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="n">values</span><span class="p">,</span>
+    <span class="s1">&#39;even&#39;</span><span class="p">:</span> <span class="n">values</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s1">&#39;above_three&#39;</span><span class="p">:</span> <span class="n">values</span> <span class="o">&gt;</span> <span class="mi">3</span> 
+<span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;f&#39;</span><span class="p">,</span> <span class="s1">&#39;g&#39;</span><span class="p">])</span>
+
+<span class="c1"># Change False to True for each block of code to see what it does</span>
+
+<span class="c1"># Examine DataFrame</span>
+<span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">example_df</span>
+    
+<span class="c1"># Examine groups</span>
+<span class="k">if</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">grouped_data</span> <span class="o">=</span> <span class="n">example_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;even&#39;</span><span class="p">)</span>
+    <span class="c1"># The groups attribute is a dictionary mapping keys to lists of row indexes</span>
+    <span class="k">print</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">grouped_data</span><span class="o">.</span><span class="n">groups</span>
+    
+<span class="c1"># Group by multiple columns</span>
+<span class="k">if</span> <span class="bp">True</span><span class="p">:</span>
+    <span class="n">grouped_data</span> <span class="o">=</span> <span class="n">example_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;even&#39;</span><span class="p">,</span> <span class="s1">&#39;above_three&#39;</span><span class="p">])</span>
+    <span class="k">print</span> <span class="s2">&quot;This: &quot;</span><span class="p">,</span> <span class="n">grouped_data</span><span class="o">.</span><span class="n">groups</span>
+    
+<span class="c1"># Get sum of each group</span>
+<span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="n">grouped_data</span> <span class="o">=</span> <span class="n">example_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;even&#39;</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">grouped_data</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    
+<span class="c1"># Limit columns in result</span>
+<span class="k">if</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="n">grouped_data</span> <span class="o">=</span> <span class="n">example_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;even&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># You can take one or more columns from the result DataFrame</span>
+    <span class="k">print</span> <span class="n">grouped_data</span><span class="o">.</span><span class="n">sum</span><span class="p">()[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span>
+    
+    <span class="k">print</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="c1"># Blank line to separate results</span>
+    
+    <span class="c1"># You can also take a subset of columns from the grouped data before </span>
+    <span class="c1"># collapsing to a DataFrame. In this case, the result is the same.</span>
+    <span class="k">print</span> <span class="n">grouped_data</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+{False: Index([u&#39;a&#39;, u&#39;b&#39;, u&#39;e&#39;], dtype=&#39;object&#39;), True: Index([u&#39;c&#39;, u&#39;d&#39;, u&#39;f&#39;, u&#39;g&#39;], dtype=&#39;object&#39;)}
+This:  {(True, False): Index([u&#39;c&#39;], dtype=&#39;object&#39;), (False, False): Index([u&#39;a&#39;, u&#39;b&#39;, u&#39;e&#39;], dtype=&#39;object&#39;), (True, True): Index([u&#39;d&#39;, u&#39;f&#39;, u&#39;g&#39;], dtype=&#39;object&#39;)}
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[178]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span>    
+<span class="n">filename</span> <span class="o">=</span> <span class="s1">&#39;nyc_subway_weather.csv&#39;</span>
+<span class="n">subway_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+<span class="c1">### Write code here to group the subway data by a variable of your choice, then</span>
+<span class="c1">### either print out the mean ridership within each group or create a plot.</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[178]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>UNIT</th>
+      <th>DATEn</th>
+      <th>TIMEn</th>
+      <th>ENTRIESn</th>
+      <th>EXITSn</th>
+      <th>ENTRIESn_hourly</th>
+      <th>EXITSn_hourly</th>
+      <th>datetime</th>
+      <th>hour</th>
+      <th>day_week</th>
+      <th>...</th>
+      <th>pressurei</th>
+      <th>rain</th>
+      <th>tempi</th>
+      <th>wspdi</th>
+      <th>meanprecipi</th>
+      <th>meanpressurei</th>
+      <th>meantempi</th>
+      <th>meanwspdi</th>
+      <th>weather_lat</th>
+      <th>weather_lon</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>R003</td>
+      <td>05-01-11</td>
+      <td>00:00:00</td>
+      <td>4388333</td>
+      <td>2911002</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-01 00:00:00</td>
+      <td>0</td>
+      <td>6</td>
+      <td>...</td>
+      <td>30.22</td>
+      <td>0</td>
+      <td>55.9</td>
+      <td>3.5</td>
+      <td>0.000000</td>
+      <td>30.258000</td>
+      <td>55.980000</td>
+      <td>7.860000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>R003</td>
+      <td>05-01-11</td>
+      <td>04:00:00</td>
+      <td>4388333</td>
+      <td>2911002</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-01 04:00:00</td>
+      <td>4</td>
+      <td>6</td>
+      <td>...</td>
+      <td>30.25</td>
+      <td>0</td>
+      <td>52.0</td>
+      <td>3.5</td>
+      <td>0.000000</td>
+      <td>30.258000</td>
+      <td>55.980000</td>
+      <td>7.860000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>R003</td>
+      <td>05-01-11</td>
+      <td>12:00:00</td>
+      <td>4388333</td>
+      <td>2911002</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-01 12:00:00</td>
+      <td>12</td>
+      <td>6</td>
+      <td>...</td>
+      <td>30.28</td>
+      <td>0</td>
+      <td>62.1</td>
+      <td>6.9</td>
+      <td>0.000000</td>
+      <td>30.258000</td>
+      <td>55.980000</td>
+      <td>7.860000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>R003</td>
+      <td>05-01-11</td>
+      <td>16:00:00</td>
+      <td>4388333</td>
+      <td>2911002</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-01 16:00:00</td>
+      <td>16</td>
+      <td>6</td>
+      <td>...</td>
+      <td>30.26</td>
+      <td>0</td>
+      <td>57.9</td>
+      <td>15.0</td>
+      <td>0.000000</td>
+      <td>30.258000</td>
+      <td>55.980000</td>
+      <td>7.860000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>R003</td>
+      <td>05-01-11</td>
+      <td>20:00:00</td>
+      <td>4388333</td>
+      <td>2911002</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-01 20:00:00</td>
+      <td>20</td>
+      <td>6</td>
+      <td>...</td>
+      <td>30.28</td>
+      <td>0</td>
+      <td>52.0</td>
+      <td>10.4</td>
+      <td>0.000000</td>
+      <td>30.258000</td>
+      <td>55.980000</td>
+      <td>7.860000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>R003</td>
+      <td>05-02-11</td>
+      <td>00:00:00</td>
+      <td>4388348</td>
+      <td>2911036</td>
+      <td>15.0</td>
+      <td>34.0</td>
+      <td>2011-05-02 00:00:00</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>30.31</td>
+      <td>0</td>
+      <td>50.0</td>
+      <td>6.9</td>
+      <td>0.000000</td>
+      <td>30.238333</td>
+      <td>54.166667</td>
+      <td>8.250000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>R003</td>
+      <td>05-02-11</td>
+      <td>04:00:00</td>
+      <td>5818689</td>
+      <td>3874767</td>
+      <td>19.0</td>
+      <td>40.0</td>
+      <td>2011-05-02 04:00:00</td>
+      <td>4</td>
+      <td>0</td>
+      <td>...</td>
+      <td>30.27</td>
+      <td>0</td>
+      <td>50.0</td>
+      <td>4.6</td>
+      <td>0.000000</td>
+      <td>30.238333</td>
+      <td>54.166667</td>
+      <td>8.250000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>R003</td>
+      <td>05-02-11</td>
+      <td>08:00:00</td>
+      <td>4388855</td>
+      <td>2911194</td>
+      <td>488.0</td>
+      <td>118.0</td>
+      <td>2011-05-02 08:00:00</td>
+      <td>8</td>
+      <td>0</td>
+      <td>...</td>
+      <td>30.30</td>
+      <td>0</td>
+      <td>53.1</td>
+      <td>10.4</td>
+      <td>0.000000</td>
+      <td>30.238333</td>
+      <td>54.166667</td>
+      <td>8.250000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>R003</td>
+      <td>05-02-11</td>
+      <td>12:00:00</td>
+      <td>4389345</td>
+      <td>2911326</td>
+      <td>490.0</td>
+      <td>132.0</td>
+      <td>2011-05-02 12:00:00</td>
+      <td>12</td>
+      <td>0</td>
+      <td>...</td>
+      <td>30.24</td>
+      <td>0</td>
+      <td>57.0</td>
+      <td>11.5</td>
+      <td>0.000000</td>
+      <td>30.238333</td>
+      <td>54.166667</td>
+      <td>8.250000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>R003</td>
+      <td>05-02-11</td>
+      <td>16:00:00</td>
+      <td>4389576</td>
+      <td>2911558</td>
+      <td>231.0</td>
+      <td>232.0</td>
+      <td>2011-05-02 16:00:00</td>
+      <td>16</td>
+      <td>0</td>
+      <td>...</td>
+      <td>30.16</td>
+      <td>0</td>
+      <td>59.0</td>
+      <td>11.5</td>
+      <td>0.000000</td>
+      <td>30.238333</td>
+      <td>54.166667</td>
+      <td>8.250000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>R003</td>
+      <td>05-02-11</td>
+      <td>20:00:00</td>
+      <td>4389811</td>
+      <td>2911963</td>
+      <td>235.0</td>
+      <td>405.0</td>
+      <td>2011-05-02 20:00:00</td>
+      <td>20</td>
+      <td>0</td>
+      <td>...</td>
+      <td>30.15</td>
+      <td>0</td>
+      <td>55.9</td>
+      <td>4.6</td>
+      <td>0.000000</td>
+      <td>30.238333</td>
+      <td>54.166667</td>
+      <td>8.250000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>R003</td>
+      <td>05-03-11</td>
+      <td>00:00:00</td>
+      <td>4389885</td>
+      <td>2912127</td>
+      <td>74.0</td>
+      <td>164.0</td>
+      <td>2011-05-03 00:00:00</td>
+      <td>0</td>
+      <td>1</td>
+      <td>...</td>
+      <td>30.13</td>
+      <td>0</td>
+      <td>54.0</td>
+      <td>4.6</td>
+      <td>0.000000</td>
+      <td>30.048000</td>
+      <td>58.940000</td>
+      <td>8.060000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>R003</td>
+      <td>05-03-11</td>
+      <td>04:00:00</td>
+      <td>4389905</td>
+      <td>2912160</td>
+      <td>20.0</td>
+      <td>33.0</td>
+      <td>2011-05-03 04:00:00</td>
+      <td>4</td>
+      <td>1</td>
+      <td>...</td>
+      <td>30.11</td>
+      <td>0</td>
+      <td>51.8</td>
+      <td>5.8</td>
+      <td>0.000000</td>
+      <td>30.048000</td>
+      <td>58.940000</td>
+      <td>8.060000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>R003</td>
+      <td>05-03-11</td>
+      <td>12:00:00</td>
+      <td>4390880</td>
+      <td>2912394</td>
+      <td>975.0</td>
+      <td>234.0</td>
+      <td>2011-05-03 12:00:00</td>
+      <td>12</td>
+      <td>1</td>
+      <td>...</td>
+      <td>30.07</td>
+      <td>0</td>
+      <td>60.8</td>
+      <td>9.2</td>
+      <td>0.000000</td>
+      <td>30.048000</td>
+      <td>58.940000</td>
+      <td>8.060000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>R003</td>
+      <td>05-03-11</td>
+      <td>16:00:00</td>
+      <td>4391147</td>
+      <td>2912651</td>
+      <td>267.0</td>
+      <td>257.0</td>
+      <td>2011-05-03 16:00:00</td>
+      <td>16</td>
+      <td>1</td>
+      <td>...</td>
+      <td>29.98</td>
+      <td>0</td>
+      <td>66.0</td>
+      <td>9.2</td>
+      <td>0.000000</td>
+      <td>30.048000</td>
+      <td>58.940000</td>
+      <td>8.060000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>R003</td>
+      <td>05-03-11</td>
+      <td>20:00:00</td>
+      <td>4391424</td>
+      <td>2913049</td>
+      <td>277.0</td>
+      <td>398.0</td>
+      <td>2011-05-03 20:00:00</td>
+      <td>20</td>
+      <td>1</td>
+      <td>...</td>
+      <td>29.95</td>
+      <td>0</td>
+      <td>62.1</td>
+      <td>11.5</td>
+      <td>0.000000</td>
+      <td>30.048000</td>
+      <td>58.940000</td>
+      <td>8.060000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>R003</td>
+      <td>05-04-11</td>
+      <td>00:00:00</td>
+      <td>4391507</td>
+      <td>2913223</td>
+      <td>83.0</td>
+      <td>174.0</td>
+      <td>2011-05-04 00:00:00</td>
+      <td>0</td>
+      <td>2</td>
+      <td>...</td>
+      <td>29.94</td>
+      <td>1</td>
+      <td>59.0</td>
+      <td>9.2</td>
+      <td>0.010000</td>
+      <td>29.953333</td>
+      <td>53.933333</td>
+      <td>11.700000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>R003</td>
+      <td>05-04-11</td>
+      <td>04:00:00</td>
+      <td>4391531</td>
+      <td>2913258</td>
+      <td>24.0</td>
+      <td>35.0</td>
+      <td>2011-05-04 04:00:00</td>
+      <td>4</td>
+      <td>2</td>
+      <td>...</td>
+      <td>29.91</td>
+      <td>1</td>
+      <td>60.1</td>
+      <td>0.0</td>
+      <td>0.010000</td>
+      <td>29.953333</td>
+      <td>53.933333</td>
+      <td>11.700000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>R003</td>
+      <td>05-04-11</td>
+      <td>08:00:00</td>
+      <td>4392063</td>
+      <td>2913388</td>
+      <td>532.0</td>
+      <td>130.0</td>
+      <td>2011-05-04 08:00:00</td>
+      <td>8</td>
+      <td>2</td>
+      <td>...</td>
+      <td>29.94</td>
+      <td>1</td>
+      <td>55.4</td>
+      <td>15.0</td>
+      <td>0.010000</td>
+      <td>29.953333</td>
+      <td>53.933333</td>
+      <td>11.700000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>R003</td>
+      <td>05-04-11</td>
+      <td>12:00:00</td>
+      <td>4392517</td>
+      <td>2913495</td>
+      <td>454.0</td>
+      <td>107.0</td>
+      <td>2011-05-04 12:00:00</td>
+      <td>12</td>
+      <td>2</td>
+      <td>...</td>
+      <td>29.96</td>
+      <td>1</td>
+      <td>51.1</td>
+      <td>11.5</td>
+      <td>0.010000</td>
+      <td>29.953333</td>
+      <td>53.933333</td>
+      <td>11.700000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>R003</td>
+      <td>05-04-11</td>
+      <td>16:00:00</td>
+      <td>4392764</td>
+      <td>2913744</td>
+      <td>247.0</td>
+      <td>249.0</td>
+      <td>2011-05-04 16:00:00</td>
+      <td>16</td>
+      <td>2</td>
+      <td>...</td>
+      <td>29.96</td>
+      <td>1</td>
+      <td>48.0</td>
+      <td>18.4</td>
+      <td>0.010000</td>
+      <td>29.953333</td>
+      <td>53.933333</td>
+      <td>11.700000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>R003</td>
+      <td>05-04-11</td>
+      <td>20:00:00</td>
+      <td>4392984</td>
+      <td>2914100</td>
+      <td>220.0</td>
+      <td>356.0</td>
+      <td>2011-05-04 20:00:00</td>
+      <td>20</td>
+      <td>2</td>
+      <td>...</td>
+      <td>30.01</td>
+      <td>1</td>
+      <td>50.0</td>
+      <td>16.1</td>
+      <td>0.010000</td>
+      <td>29.953333</td>
+      <td>53.933333</td>
+      <td>11.700000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>R003</td>
+      <td>05-05-11</td>
+      <td>00:00:00</td>
+      <td>4393043</td>
+      <td>2914284</td>
+      <td>59.0</td>
+      <td>184.0</td>
+      <td>2011-05-05 00:00:00</td>
+      <td>0</td>
+      <td>3</td>
+      <td>...</td>
+      <td>30.01</td>
+      <td>0</td>
+      <td>48.9</td>
+      <td>16.1</td>
+      <td>0.000000</td>
+      <td>29.944000</td>
+      <td>55.720000</td>
+      <td>15.220000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>R003</td>
+      <td>05-05-11</td>
+      <td>04:00:00</td>
+      <td>4393062</td>
+      <td>2914319</td>
+      <td>19.0</td>
+      <td>35.0</td>
+      <td>2011-05-05 04:00:00</td>
+      <td>4</td>
+      <td>3</td>
+      <td>...</td>
+      <td>29.98</td>
+      <td>0</td>
+      <td>48.0</td>
+      <td>12.7</td>
+      <td>0.000000</td>
+      <td>29.944000</td>
+      <td>55.720000</td>
+      <td>15.220000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>R003</td>
+      <td>05-05-11</td>
+      <td>12:00:00</td>
+      <td>4394057</td>
+      <td>2914509</td>
+      <td>995.0</td>
+      <td>190.0</td>
+      <td>2011-05-05 12:00:00</td>
+      <td>12</td>
+      <td>3</td>
+      <td>...</td>
+      <td>29.91</td>
+      <td>0</td>
+      <td>60.8</td>
+      <td>15.0</td>
+      <td>0.000000</td>
+      <td>29.944000</td>
+      <td>55.720000</td>
+      <td>15.220000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>R003</td>
+      <td>05-05-11</td>
+      <td>16:00:00</td>
+      <td>4394364</td>
+      <td>2914754</td>
+      <td>307.0</td>
+      <td>245.0</td>
+      <td>2011-05-05 16:00:00</td>
+      <td>16</td>
+      <td>3</td>
+      <td>...</td>
+      <td>29.88</td>
+      <td>0</td>
+      <td>63.0</td>
+      <td>19.6</td>
+      <td>0.000000</td>
+      <td>29.944000</td>
+      <td>55.720000</td>
+      <td>15.220000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>R003</td>
+      <td>05-05-11</td>
+      <td>20:00:00</td>
+      <td>4394592</td>
+      <td>2915145</td>
+      <td>228.0</td>
+      <td>391.0</td>
+      <td>2011-05-05 20:00:00</td>
+      <td>20</td>
+      <td>3</td>
+      <td>...</td>
+      <td>29.94</td>
+      <td>0</td>
+      <td>57.9</td>
+      <td>12.7</td>
+      <td>0.000000</td>
+      <td>29.944000</td>
+      <td>55.720000</td>
+      <td>15.220000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>R003</td>
+      <td>05-06-11</td>
+      <td>00:00:00</td>
+      <td>4394665</td>
+      <td>2915321</td>
+      <td>73.0</td>
+      <td>176.0</td>
+      <td>2011-05-06 00:00:00</td>
+      <td>0</td>
+      <td>4</td>
+      <td>...</td>
+      <td>29.97</td>
+      <td>0</td>
+      <td>55.0</td>
+      <td>3.5</td>
+      <td>0.000000</td>
+      <td>29.918000</td>
+      <td>60.580000</td>
+      <td>11.300000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>R003</td>
+      <td>05-06-11</td>
+      <td>04:00:00</td>
+      <td>4394687</td>
+      <td>2915369</td>
+      <td>22.0</td>
+      <td>48.0</td>
+      <td>2011-05-06 04:00:00</td>
+      <td>4</td>
+      <td>4</td>
+      <td>...</td>
+      <td>29.96</td>
+      <td>0</td>
+      <td>52.0</td>
+      <td>8.1</td>
+      <td>0.000000</td>
+      <td>29.918000</td>
+      <td>60.580000</td>
+      <td>11.300000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>R003</td>
+      <td>05-06-11</td>
+      <td>12:00:00</td>
+      <td>4395657</td>
+      <td>2915590</td>
+      <td>970.0</td>
+      <td>221.0</td>
+      <td>2011-05-06 12:00:00</td>
+      <td>12</td>
+      <td>4</td>
+      <td>...</td>
+      <td>29.94</td>
+      <td>0</td>
+      <td>68.0</td>
+      <td>16.1</td>
+      <td>0.000000</td>
+      <td>29.918000</td>
+      <td>60.580000</td>
+      <td>11.300000</td>
+      <td>40.700348</td>
+      <td>-73.887177</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>42619</th>
+      <td>R464</td>
+      <td>05-26-11</td>
+      <td>16:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-26 16:00:00</td>
+      <td>16</td>
+      <td>3</td>
+      <td>...</td>
+      <td>29.89</td>
+      <td>0</td>
+      <td>69.1</td>
+      <td>9.2</td>
+      <td>0.000000</td>
+      <td>29.922000</td>
+      <td>66.640000</td>
+      <td>7.160000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42620</th>
+      <td>R464</td>
+      <td>05-26-11</td>
+      <td>20:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-26 20:00:00</td>
+      <td>20</td>
+      <td>3</td>
+      <td>...</td>
+      <td>29.88</td>
+      <td>0</td>
+      <td>66.9</td>
+      <td>8.1</td>
+      <td>0.000000</td>
+      <td>29.922000</td>
+      <td>66.640000</td>
+      <td>7.160000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42621</th>
+      <td>R464</td>
+      <td>05-27-11</td>
+      <td>00:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-27 00:00:00</td>
+      <td>0</td>
+      <td>4</td>
+      <td>...</td>
+      <td>29.92</td>
+      <td>0</td>
+      <td>66.0</td>
+      <td>4.6</td>
+      <td>0.000000</td>
+      <td>29.948000</td>
+      <td>69.160000</td>
+      <td>12.680000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42622</th>
+      <td>R464</td>
+      <td>05-27-11</td>
+      <td>04:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-27 04:00:00</td>
+      <td>4</td>
+      <td>4</td>
+      <td>...</td>
+      <td>29.94</td>
+      <td>0</td>
+      <td>64.0</td>
+      <td>3.5</td>
+      <td>0.000000</td>
+      <td>29.948000</td>
+      <td>69.160000</td>
+      <td>12.680000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42623</th>
+      <td>R464</td>
+      <td>05-27-11</td>
+      <td>12:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-27 12:00:00</td>
+      <td>12</td>
+      <td>4</td>
+      <td>...</td>
+      <td>29.99</td>
+      <td>0</td>
+      <td>73.0</td>
+      <td>12.7</td>
+      <td>0.000000</td>
+      <td>29.948000</td>
+      <td>69.160000</td>
+      <td>12.680000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42624</th>
+      <td>R464</td>
+      <td>05-27-11</td>
+      <td>16:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-27 16:00:00</td>
+      <td>16</td>
+      <td>4</td>
+      <td>...</td>
+      <td>29.93</td>
+      <td>0</td>
+      <td>75.9</td>
+      <td>20.7</td>
+      <td>0.000000</td>
+      <td>29.948000</td>
+      <td>69.160000</td>
+      <td>12.680000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42625</th>
+      <td>R464</td>
+      <td>05-27-11</td>
+      <td>20:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-27 20:00:00</td>
+      <td>20</td>
+      <td>4</td>
+      <td>...</td>
+      <td>29.96</td>
+      <td>0</td>
+      <td>66.9</td>
+      <td>21.9</td>
+      <td>0.000000</td>
+      <td>29.948000</td>
+      <td>69.160000</td>
+      <td>12.680000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42626</th>
+      <td>R464</td>
+      <td>05-28-11</td>
+      <td>00:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-28 00:00:00</td>
+      <td>0</td>
+      <td>5</td>
+      <td>...</td>
+      <td>30.00</td>
+      <td>0</td>
+      <td>66.0</td>
+      <td>4.6</td>
+      <td>0.000000</td>
+      <td>30.032000</td>
+      <td>69.780000</td>
+      <td>10.360000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42627</th>
+      <td>R464</td>
+      <td>05-28-11</td>
+      <td>04:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-28 04:00:00</td>
+      <td>4</td>
+      <td>5</td>
+      <td>...</td>
+      <td>30.00</td>
+      <td>0</td>
+      <td>64.0</td>
+      <td>6.9</td>
+      <td>0.000000</td>
+      <td>30.032000</td>
+      <td>69.780000</td>
+      <td>10.360000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42628</th>
+      <td>R464</td>
+      <td>05-28-11</td>
+      <td>12:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-28 12:00:00</td>
+      <td>12</td>
+      <td>5</td>
+      <td>...</td>
+      <td>30.05</td>
+      <td>0</td>
+      <td>77.0</td>
+      <td>11.5</td>
+      <td>0.000000</td>
+      <td>30.032000</td>
+      <td>69.780000</td>
+      <td>10.360000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42629</th>
+      <td>R464</td>
+      <td>05-28-11</td>
+      <td>16:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-28 16:00:00</td>
+      <td>16</td>
+      <td>5</td>
+      <td>...</td>
+      <td>30.05</td>
+      <td>0</td>
+      <td>73.9</td>
+      <td>15.0</td>
+      <td>0.000000</td>
+      <td>30.032000</td>
+      <td>69.780000</td>
+      <td>10.360000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42630</th>
+      <td>R464</td>
+      <td>05-28-11</td>
+      <td>20:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-28 20:00:00</td>
+      <td>20</td>
+      <td>5</td>
+      <td>...</td>
+      <td>30.06</td>
+      <td>0</td>
+      <td>68.0</td>
+      <td>13.8</td>
+      <td>0.000000</td>
+      <td>30.032000</td>
+      <td>69.780000</td>
+      <td>10.360000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42631</th>
+      <td>R464</td>
+      <td>05-29-11</td>
+      <td>00:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-29 00:00:00</td>
+      <td>0</td>
+      <td>6</td>
+      <td>...</td>
+      <td>30.09</td>
+      <td>0</td>
+      <td>66.0</td>
+      <td>9.2</td>
+      <td>0.000000</td>
+      <td>30.096667</td>
+      <td>69.666667</td>
+      <td>11.133333</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42632</th>
+      <td>R464</td>
+      <td>05-29-11</td>
+      <td>04:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-29 04:00:00</td>
+      <td>4</td>
+      <td>6</td>
+      <td>...</td>
+      <td>30.09</td>
+      <td>0</td>
+      <td>64.9</td>
+      <td>6.9</td>
+      <td>0.000000</td>
+      <td>30.096667</td>
+      <td>69.666667</td>
+      <td>11.133333</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42633</th>
+      <td>R464</td>
+      <td>05-29-11</td>
+      <td>08:00:00</td>
+      <td>129127</td>
+      <td>35492</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-29 08:00:00</td>
+      <td>8</td>
+      <td>6</td>
+      <td>...</td>
+      <td>30.13</td>
+      <td>0</td>
+      <td>66.2</td>
+      <td>6.9</td>
+      <td>0.000000</td>
+      <td>30.096667</td>
+      <td>69.666667</td>
+      <td>11.133333</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42634</th>
+      <td>R464</td>
+      <td>05-29-11</td>
+      <td>12:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-29 12:00:00</td>
+      <td>12</td>
+      <td>6</td>
+      <td>...</td>
+      <td>30.13</td>
+      <td>0</td>
+      <td>75.9</td>
+      <td>10.4</td>
+      <td>0.000000</td>
+      <td>30.096667</td>
+      <td>69.666667</td>
+      <td>11.133333</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42635</th>
+      <td>R464</td>
+      <td>05-29-11</td>
+      <td>16:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-29 16:00:00</td>
+      <td>16</td>
+      <td>6</td>
+      <td>...</td>
+      <td>30.06</td>
+      <td>0</td>
+      <td>75.0</td>
+      <td>18.4</td>
+      <td>0.000000</td>
+      <td>30.096667</td>
+      <td>69.666667</td>
+      <td>11.133333</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42636</th>
+      <td>R464</td>
+      <td>05-29-11</td>
+      <td>20:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-29 20:00:00</td>
+      <td>20</td>
+      <td>6</td>
+      <td>...</td>
+      <td>30.08</td>
+      <td>0</td>
+      <td>70.0</td>
+      <td>15.0</td>
+      <td>0.000000</td>
+      <td>30.096667</td>
+      <td>69.666667</td>
+      <td>11.133333</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42637</th>
+      <td>R464</td>
+      <td>05-30-11</td>
+      <td>00:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-30 00:00:00</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>30.09</td>
+      <td>1</td>
+      <td>64.9</td>
+      <td>5.8</td>
+      <td>0.001667</td>
+      <td>30.080000</td>
+      <td>73.616667</td>
+      <td>7.500000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42638</th>
+      <td>R464</td>
+      <td>05-30-11</td>
+      <td>04:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-30 04:00:00</td>
+      <td>4</td>
+      <td>0</td>
+      <td>...</td>
+      <td>30.04</td>
+      <td>1</td>
+      <td>66.9</td>
+      <td>3.5</td>
+      <td>0.001667</td>
+      <td>30.080000</td>
+      <td>73.616667</td>
+      <td>7.500000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42639</th>
+      <td>R464</td>
+      <td>05-30-11</td>
+      <td>08:00:00</td>
+      <td>129127</td>
+      <td>35492</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-30 08:00:00</td>
+      <td>8</td>
+      <td>0</td>
+      <td>...</td>
+      <td>30.09</td>
+      <td>1</td>
+      <td>72.0</td>
+      <td>13.8</td>
+      <td>0.001667</td>
+      <td>30.080000</td>
+      <td>73.616667</td>
+      <td>7.500000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42640</th>
+      <td>R464</td>
+      <td>05-30-11</td>
+      <td>12:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-30 12:00:00</td>
+      <td>12</td>
+      <td>0</td>
+      <td>...</td>
+      <td>30.10</td>
+      <td>1</td>
+      <td>82.9</td>
+      <td>8.1</td>
+      <td>0.001667</td>
+      <td>30.080000</td>
+      <td>73.616667</td>
+      <td>7.500000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42641</th>
+      <td>R464</td>
+      <td>05-30-11</td>
+      <td>16:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-30 16:00:00</td>
+      <td>16</td>
+      <td>0</td>
+      <td>...</td>
+      <td>30.06</td>
+      <td>1</td>
+      <td>82.0</td>
+      <td>9.2</td>
+      <td>0.001667</td>
+      <td>30.080000</td>
+      <td>73.616667</td>
+      <td>7.500000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42642</th>
+      <td>R464</td>
+      <td>05-30-11</td>
+      <td>20:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-30 20:00:00</td>
+      <td>20</td>
+      <td>0</td>
+      <td>...</td>
+      <td>30.10</td>
+      <td>1</td>
+      <td>73.0</td>
+      <td>4.6</td>
+      <td>0.001667</td>
+      <td>30.080000</td>
+      <td>73.616667</td>
+      <td>7.500000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42643</th>
+      <td>R464</td>
+      <td>05-31-11</td>
+      <td>00:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-31 00:00:00</td>
+      <td>0</td>
+      <td>1</td>
+      <td>...</td>
+      <td>30.13</td>
+      <td>0</td>
+      <td>72.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>30.168333</td>
+      <td>75.366667</td>
+      <td>7.100000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42644</th>
+      <td>R464</td>
+      <td>05-31-11</td>
+      <td>04:00:00</td>
+      <td>567311</td>
+      <td>132804</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-31 04:00:00</td>
+      <td>4</td>
+      <td>1</td>
+      <td>...</td>
+      <td>30.14</td>
+      <td>0</td>
+      <td>73.0</td>
+      <td>6.9</td>
+      <td>0.000000</td>
+      <td>30.168333</td>
+      <td>75.366667</td>
+      <td>7.100000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42645</th>
+      <td>R464</td>
+      <td>05-31-11</td>
+      <td>08:00:00</td>
+      <td>290767</td>
+      <td>59788</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-31 08:00:00</td>
+      <td>8</td>
+      <td>1</td>
+      <td>...</td>
+      <td>30.19</td>
+      <td>0</td>
+      <td>80.1</td>
+      <td>6.9</td>
+      <td>0.000000</td>
+      <td>30.168333</td>
+      <td>75.366667</td>
+      <td>7.100000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42646</th>
+      <td>R464</td>
+      <td>05-31-11</td>
+      <td>12:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-31 12:00:00</td>
+      <td>12</td>
+      <td>1</td>
+      <td>...</td>
+      <td>30.20</td>
+      <td>0</td>
+      <td>81.0</td>
+      <td>10.4</td>
+      <td>0.000000</td>
+      <td>30.168333</td>
+      <td>75.366667</td>
+      <td>7.100000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42647</th>
+      <td>R464</td>
+      <td>05-31-11</td>
+      <td>16:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-31 16:00:00</td>
+      <td>16</td>
+      <td>1</td>
+      <td>...</td>
+      <td>30.17</td>
+      <td>0</td>
+      <td>77.0</td>
+      <td>13.8</td>
+      <td>0.000000</td>
+      <td>30.168333</td>
+      <td>75.366667</td>
+      <td>7.100000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+    <tr>
+      <th>42648</th>
+      <td>R464</td>
+      <td>05-31-11</td>
+      <td>20:00:00</td>
+      <td>419894</td>
+      <td>95280</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2011-05-31 20:00:00</td>
+      <td>20</td>
+      <td>1</td>
+      <td>...</td>
+      <td>30.18</td>
+      <td>0</td>
+      <td>69.1</td>
+      <td>4.6</td>
+      <td>0.000000</td>
+      <td>30.168333</td>
+      <td>75.366667</td>
+      <td>7.100000</td>
+      <td>40.660004</td>
+      <td>-73.844849</td>
+    </tr>
+  </tbody>
+</table>
+<p>42649 rows × 27 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[194]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span> <span class="n">subway_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;UNIT&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s1">&#39;ENTRIESn_hourly&#39;</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[194]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>UNIT
+R003     223.047619
+R004     554.302857
+R005     551.482558
+R006     634.155556
+R007     382.147059
+R008     410.958580
+R009     333.245714
+R011    7366.804348
+R012    8700.333333
+R013    2598.774194
+R016     797.076087
+R017    4213.768817
+R018    7808.481081
+R019    3267.661290
+R020    6389.865591
+R021    4715.766304
+R022    9534.258065
+R023    6169.435484
+R024    3233.913514
+R025    5364.553763
+R027    2983.870968
+R029    7245.844086
+R030    3116.037634
+R031    4367.806452
+R032    4466.643243
+R033    8250.817204
+R034    1242.923529
+R035    2831.815217
+R036     817.101695
+R037     876.404372
+           ...     
+R321    1134.978495
+R322    1832.128492
+R323    1408.476744
+R325     434.737143
+R330    1052.898305
+R335     500.725610
+R336     117.939024
+R337     175.267857
+R338      27.080460
+R341     554.387978
+R344     527.810976
+R345     561.308571
+R346    1327.574713
+R348     231.844828
+R354     272.712575
+R356    1162.198864
+R358     312.005988
+R370     567.551136
+R371     792.924419
+R372     820.591716
+R373     695.547619
+R382     985.610169
+R424     449.836364
+R429    1058.972678
+R453    1807.388889
+R454     184.485030
+R455     146.988095
+R456     294.548023
+R459      85.897727
+R464       0.000000
+Name: ENTRIESn_hourly, dtype: float64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[227]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">subway_df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;day_week&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()[</span><span class="s1">&#39;ENTRIESn_hourly&#39;</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[228]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="n">data</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[228]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;matplotlib.axes._subplots.AxesSubplot at 0x7fdcf21b1650&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area"><div class="prompt"></div>
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhYAAAF/CAYAAAAVVIDcAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+AAAPYQAAD2EBqD+naQAAIABJREFUeJzs3XmYXFWd//F3Lb1v6WzdnT0h5GTrrEASSCIIggoIirLr
+6KjjghuOCPIbRx1HBVFcJoM6jo6CgMqiIiABFMjKlq0728lOtl6SdKe39FbL749bFSpNQroq1X2r
+qj+v5+HppO6p29/+pkl/cu6553rC4TAiIiIiyeB1uwARERHJHAoWIiIikjQKFiIiIpI0ChYiIiKS
+NAoWIiIikjQKFiIiIpI0ChYiIiKSNAoWIiIikjQKFiIiIpI0ChYiIiKSNP54Bhtjvga8H5gMtAOr
+gNuttdtOMf5vwGXA1dbaJ2JeHw38HLgQaAHuB+6w1oZixlwI/BCYBuwFvmOt/W089YqIiEj/infG
+YhHwX8A84BIgC3jWGJPXc6Ax5lYgCIR7vO4FnsYJNfOBfwI+CvxHzJhxwJPA34GZwE+A/zXGvCvO
+ekVERKQfxTVjYa19b+zvjTEfBeqBucCKmNdnAl8CzgVqe5zmMpwZj4ustYeBamPM14G7jDHftNYG
+gM8Au6y1X41+amPMQuBW4Ll4ahYREZH+c6ZrLAbhzEg0RF+IzF48BNxira0/yXvmA9WRUBG1FCjB
+uewRHfN8j/ctBRacYb0iIiLShxIOFsYYD/BjYIW1dnPMoR9FXnvyFG8tB+p6vFYXc+ztxhQbY3IS
+rVlERET6VlyXQnq4D5gKXBB9wRjzPuCdwKwEzxl+m2OeXow58WThcNjj8Zx+oIiIiPSU0A/QhIKF
+MWYJ8F5gkbW2JubQRcAEoMkYE/uWx40xy6y178RZc3Fuj1OWRT7Wxnws6zFmONBsre3qbZ0ej4fm
+5naCwdDpBws+n5fi4jz1LE7qW/zUs8Sob/FTzxIT7Vsi4g4WkVBxFfAOa+3eHoe/B/yyx2sbgS/i
+3OUBsBq40xgzNGadxaVAE7AlZsx7epzn0sjrcQkGQwQC+maKh3qWGPUtfupZYtS3+Kln/SfefSzu
+A24A3ge0GWOiswpN1tqOyGLN+h7vAdhnrX0j8tKzwGbgAWPM7UAF8G1gibW2OzLm58DnjDF3A78G
+LgY+iDNLIiIiIikq3sWbnwaKgReBgzH/Xfs27zlhTURkE6wrcPa4WIWzOdZvgG/EjNkDXI6zV8Z6
+nNtMP26t7XmniIiIiKQQTzjc67WQ6Sjc2Nim6a9e8vu9lJYWoJ7FR32Ln3qWGPUtfupZYiJ9S2jx
+pp4VIiIiIkmjYCEiIiJJo2AhIiIiSaNgISIiIkmjYCEiIiJJo2AhIiIiSaNgISIiIkmjYCEiIiJJ
+o2AhIiIiSaNgISIiIkmjYCEiIiJJE/dj00VEegqHw3R1hzjWGaCjK+B87AzS3hn9deRjV5BjnQE6
+u4KEPR7ysr2UFuYwuDiXwUU5lEY+5uXoryaRdKX/e0UGuGAoRHskBLz5X+T3XYGYcHDimGOdQTq6
+3hwfSuIDDfNy/AwuzmFwUW7k45vhY3BxLqVFOWRn+ZL2+UQkeRQsRNJUOBymszt4YijoCpw2JPR8
+rau775/46PFAXrafvBwfeTl+8nOzyMv1c7ixnSPNHXR0BU8Y394Z4MChAAcOtZ3ynIV5WSeEjyHF
+uZTG/H5QYQ5+n672ivQ3BQsRFwSCoeOXBdo7Trx8cKw3ISFyPImTBKeU7feSm+N3AkGOj9xsP/k5
+fnKjISHH77yW6yc320d+ZGzu8WM+crN9eDxvPoG556Osj3UEaGjpoKG58/jHxuYOGlo6aYh87O7x
+yOvW9m5a27vZW9d60ro9QElh9gkzHcdnPCIBpKQwG68noSdDi8gpKFiInIFwOMye2mY2vnGUww1t
+tB7rPh4S2mOCgvNaMPJagK5Af84SRP/zxfw68vvsE49FQ0Je7puhoD/+1Z+f6yc/t5BRwwpPejwc
+DtPa3u0Ejx6Bo6HZCSJHWzsJht5MWmHgaGsXR1u72HWKz+vzehhUmOPMfJwigBTlZZ0QikTk7SlY
+iCSgqbWT1ZvqWFFdw8HDp56uT1S23/vWQNDrkOD8PifLlzE/ED0eD0X52RTlZzO2vOikY0KhME1t
+XTS0dNB4igDS1NpF7CRPMBTmSHMHR5o7gKaTnjfL76W0KGadxwlrP3IZXJxLfq7+KhWJ0v8NIr0U
+CIbYsOMwK6pqqN7VcNLFih4Pb14KyI5cOojMBORFLh9Ef91ztiDv+Pv6Z5Yg03i9HkqLcigtyoER
+Jx8TCIY42tp5/JKLE0DevPxypLmD1vbuE97THQhR39hOfWP7KT93brYvZqbDCRylPWZBcrTYVAYI
+BQuR09hb18KKqhpe3lz3lh86E0eWsHjWCBbNGU2gsxuvh4yZJchEfp+XoSV5DC3JO+WYru4gjT0v
+tbScGEDaOwMnvKejK8jBw21vO3tVkOs/8XJLzMxHaXEupYU5ZPkVKCX9KViInETLsS5e3lzHyqoa
+9tafuDiwtCiH86eXc0FlBeWD852FiIPyaGwMEeiHtRPSt7KzfJQNzqdscP4px7R3Bmho6bHANCZ4
+NLR0vOVum7aOAG0dreyrP/liU4Diguy3rPM44c6XQblJ+zpF+oqChUhEMBSielcDK6tqWL/j8AkL
+Af0+D7PPHsbCGRVMGzcYr1ezEgNZXo6fkTl+Rg4tOOnxcDhMW0fgpIEjugC1seXExaYAzW1dNLd1
+sae25aTn9Xo8zJg4lM9dMx0v+h6U1KRgIQPegcNtrKyqYdWmWprbuk44Nq68iIUzKjhvShmFeVku
+VSjpxuPxUJiXRWFeFmPKTrHYNBympa3rlDMe0TtdYpfyhMJh1m8/xGub65k3tayfvhqR+ChYyIB0
+rKObVzbXsaK6lt01zSccK87PYkHkUsepbn8UOVNej4eSwhxKCnMYX1F80jHBUIim1q7jYeOxl3Zx
+6Gg7L64/oGAhKUvBQgaMUCjM5jcaWFFVw9pthwkE37wG7vN6mDlxKBdUllM5YYjuypCU4PN6I+ss
+coESGlo6+eM/dmD3HqW24Rjlb7MORMQtChaS8eoajrGiuoZVG2tpbOk84dioYYUsnFHB/GllFOdn
+u1ShSO8snFHBoy/uJBQKs2zDQa69aKLbJYm8hYKFZKT2zgCvb61nRXUN2/efuPFRQa6f+dPKWVhZ
+wZiyQt0eKmljUGEO500t4+WNtayqruEDiydodk1SjoKFZIxQOMy2vUdZUV3D67b+hNv9PB6onDCE
+hZUVzJw4VPsFSNq6dN5YXt5YS/OxbjbsOMxcM9ztkkROoGAhae/w0XZWbqxlZXUNh5s6TjhWMSSf
+hZUVLJhezqDCHJcqFEmeOZPLKC3KobGlk5c2HFSwkJSjYCFpqbM7yFp7iBXVNWx5o/GEY3k5fuZN
+Gc4FMyqYUFGsSx2SUXxeD4tnjuAvK3azaVcDR5o6GFKijbMkdShYSNoIh8PsPNDMiuqDvLqlno6u
+4PFjHmDquFIuqKxgzqRhZOu5DJLBFs8awRMrdhMGVlTXcNXC8W6XJHKcgoWkvMaWTlZtrGFFdS11
+DcdOODZ8UB4XVJZz/vQK/atNBoxhg/KYOn4wm3Y3sKLqIFeeP067wUrKULCQlNQdCLJu+2FWVNew
+aXfDCbsP5mT5OHfycBbOqODsUSW61CED0uKZI9i0u4EjzZ1s2tNA5YQhbpckAihYSAoJh8PsqW1h
+RXUNr26uo63jxCdImtGDuKCygnMmDyM3W9+6MrDNmjiUwrwsWtu7WbbhoIKFpIy4/nY2xnwNeD8w
+GWgHVgG3W2u3RY6XAt8CLgVGA4eBPwNft9Y2x5xnNPBz4EKgBbgfuMNaG4oZcyHwQ2AasBf4jrX2
+t4l8kZLamtq6WL2xlpUbazhw6MTHTg8pzuH86RVcUFnO8FLtMigSleX3cv70cp59bR/rtx+mua2L
+4gJt8ibui/effYuA/wJej7z3e8Czxpgp1tp2YARQAXwZ2AKMBX4Ree1aAGOMF3gaOAjMj7znAaAL
++LfImHHAk8B9wI3AJcD/GmMOWmufS/BrlRQSCIao2nmEFVU1VO86csJTHrP8XuaaYSysrGDy2FK8
+utQhclKLZ47g2df2EQyFWbWxlnfPG+N2SSLxBQtr7Xtjf2+M+ShQD8wFVlhrNwEfihmy2xjz/4AH
+jDHeyIzEZTgzHhdZaw8D1caYrwN3GWO+aa0NAJ8Bdllrvxr91MaYhcCtgIJFGttX38qKqhpWb6ql
+tb37hGNnjSxmYWUF504uIz9XlzpETmfE0AImjiphx/4mlm04yGXnjdaaI3Hdmf7tPQgIAw2nGdMc
+c5ljPlAdCRVRS4Gf4Vz22BAZ83yP8ywFfnSG9YoLWtu7eXlTLSura3mjruWEYyWF2Zw/3dleu2JI
+gUsViqSvxTNGsGN/E7UNx9i+v4lJowe5XZIMcAkHC2OMB/gxzkzF5lOMGYpzeeMXMS+XA3U9htbF
+HNvwNmOKjTE51tpOesmnffR7LdqrZPQsGAqxcVcDyzYcZN22QwSCb17q8Ps8zJk0jEUzRzB9wmB8
+3vT+M0pm3wYK9SwxJ+vbgunlPPz3bbR3BlleVcPU8YPdKi8l6XstMWfSrzOZsbgPmApccLKDxpgi
+4ClgI86Czt4Iv80xTy/GvEVxcV48w4Uz69m+uhb+/tpeXlizj4bmE/PfxFElXHLuGBbNHpWRi8z0
+vRY/9SwxPft24ZzR/G31Hl7bWs/nrptNYV6WO4WlMH2v9Z+EgoUxZgnwXmCRtbbmJMcLcS5dHAU+
+YK0NxhyuBc7t8ZaymGPRj2U9xgzHuaTSFU+tzc3tBIOh0w8UfD4vxcV5cffsWEeAlzfVsryqhp0H
+TnySaFF+FudXVrB45ghGDy8EINjVTWNX98lOlZYS7dtApp4l5lR9mz91OH9bvYeu7iB/W7GTS84Z
+7V6RKUbfa4mJ9i0RcQeLSKi4CniHtXbvSY4X4YSKduB9JwkCq4E7jTFDY9ZZXAo04dxJEh3znh7v
+uzTyelyCwRCBgL6Z4tGbnoXCYbbsaWRldQ1rth2iO2a8z+thxlnOk0Qrzxpy/LHOmf7noO+1+Kln
+ienZt1FDCxgzvJC99a28uO4AF84a6WJ1qUnfa/0n3n0s7gNuAN4HtBljorMKTdbajshMxXNALnAT
+MMgYE337ocgCzmeBzTh3ityOcyvqt4El1troP2N/DnzOGHM38GvgYuCDOLMk4qL6xmOsqK5l1caa
+t1zqGDWsgIWVFcyfVp6RlzpEUpXH42HxrBH87tlt7K1r5Y3aFsaWF7ldlgxQ8c5YfBpnjcOLPV7/
+GM4mV3N58zLHjshHT+Q944G91tqQMeYKnLtAVgFtwG+Ab0RPZq3dY4y5HLgX+AKwH/i4tbbnnSLS
+Dzq6Ary2tZ6V1bVs23f0hGMFuX7mTS1j4YwKxpYV6VY3EZfMn1rGH/6xg+5AiJc2HOQj5eb0bxLp
+A55wOK61kOkm3NjYpumvXvL7vZSWFtDY2EZ3d5Bt+46yorqG17ceorM75kmiHpg+fggLZ1Qwa+IQ
+svwD+0misX3T91rvqGeJOV3ffvnXzazeVEtejo97b1lITvbA/n8T9L2WqEjfEvqXonYhkhPUNx7j
+qeW7WL7hIIeOdpxwrHxwPgtnVLBgWjmlRTkuVSgip/KOWSNYvamW9s4gr9t6LqiscLskGYAULARw
+HgD2h39s5+nVb5zwJNG8HB/nTnYudZw1oliXOkRS2NmjSigbnE9dwzFe2nBQwUJcoWAhhMJhHnx2
+Gy+sOwA4i2Imjy1l4YwK5kwaRk6WplNF0oHH42HxzAoeeWEnO/Y3cfBwGyOGakdb6V8KFgNcKBTm
+t89sZXmVsx3JhJEl3HL1dF3qEElT50+v4PGXdhEMhVledZDr3nm22yXJAKM9TgewYCjEr57a8mao
+GFHMdz59PsNKtUOdSLoqKchm1tlDAVhZXUtAm0JJP1OwGKACwRD/84Szghyc7bZvv2kOhfnaf0Ik
+3S2eOQJwHgC4bvvh04wWSS4FiwGoOxDiZ3/eyGtb6wGYPGYQX752Jnk5ujImkgmmjRvMkGLncuay
+DQddrkYGGgWLAaarO8iSx6uP/ytm+vjBfOlDM8nNVqgQyRRer4eFM5xZi827Gzh8tN3limQgUbAY
+QDq7gvz0sSqqdx0BYNbEoXz+mkqyddeHSMZZWFlxfNvj6Doqkf6gYDFAtHcG+NEjG9i8pxGAuWYY
+n33/9AG/a6ZIphpSksu0CYMBWFFdQyiU0bssSwpRsBgAjnUEuPeP648/52Pe1DI+fdW0408dFZHM
+tDhyOaSxpZONu4+4XI0MFPrJkuFa27v5we/XsfNAMwAXVJbzySum4vPqj14k0806eyjF+VkALNug
+yyHSP/TTJYM1H+vinofXsae2BXCeI/Cx907B69W23CIDgd/n5fzItt4bdhymqbXT5YpkIFCwyFBN
+rZ18/6F17KtvBeCSuaP4yGUGr571ITKgLJrhBItgKMzKjbUuVyMDgYJFBmpo7uCuh9Zx8HAbAO+e
+N4YbLjlbDxATGYAqhhQwaVQJ4OxpEQ5rEaf0LQWLDHP4aDt3PbiWuoZjAFx5/jg+dOFZChUiA9ji
+Wc4izvrGduzeoy5XI5lOwSKD1DUe4+6H1nK4qQOA9y+ewPsXT1CoEBng5prhx3fWXValnTilbylY
+ZIiaI23c/eBajjQ7i7OuvWgiV54/zt2iRCQl5GT5mD+tDIDXtx6iraPb5YokkylYZID9h1q5+6F1
+HG3tAuCmd03i3fPGuFyViKSSd0QeTBYIhnh5U53L1UgmU7BIc2/UtvD9h9bR3NaFB/jIuw0Xzx3l
+dlkikmLGlBUxtrwIgJfWaxGn9B0FizS2u6aZex5eR2t7Nx4P/PPlU7hw1ki3yxKRFBV9nPr+Q63H
+97cRSTYFizS1ff9R7nl4Hcc6A3g9Hv7lymlcENkIR0TkZOZNKSM7y/lrX49Tl76iYJGGtr7RyL1/
+2EBHVxCf18Nnrp7OvKllbpclIikuP9fPuZOHA/Dy5jo6ugIuVySZSMEizWzcfYQfPbKBzu4gfp+H
+Wz5QyVwzzO2yRCRNRC+HdHYFeW1LvcvVSCZSsEgjG3Yc5qePVtEdCJHl9/KFD85g1sShbpclImlk
+4sgSKobkA9rTQvqGgkWaWGMPseTxagLBMDlZPm790Eymjx/idlkikmY8Hs/xWYudB5o5cKjV5Yok
+0yhYpIFXt9Txsz9vJBgKk5vt48vXzWTy2FK3yxKRNLVgejm+yFOO9Th1STYFixS3srqGXzyxiVA4
+TH6On69cP5uzRw1yuywRSWPF+dnMnuSszVq1sYbuQMjliiSTKFiksJfWH+DXT20hHIbCvCxuu2E2
+E0YUu12WiGSAxTOd29PbOgKs237I5WokkyhYpKi/r9nPb5+xhIHi/Cy+euPs47vmiYicqanjBjOk
+OBfQnhaSXAoWKeiZV/by4HPbACgpzOb2m+Ywalihy1WJSCbxejwsisxabN7TSP3RdpcrkkyhYJFi
+/rpqD398YQcAg4tzuOOmOVQMKXC5KhHJRAsrK/A4azhZoVtPJUkULFJEOBzmT8t28adluwAYWpLL
+HTfOoaw03+XKRCRTDS7OpXKCc9v6iqoagiEt4pQzp2CRAsLhMI++uJO/rtoDQFlpHnfcNIehg/Lc
+LUxEMl50T4ujrV1U72xwuRrJBP54Bhtjvga8H5gMtAOrgNuttdtixuQA9wLXATnAUuCz1tr6mDGj
+gZ8DFwItwP3AHdbaUMyYC4EfAtOAvcB3rLW/jfsrTHHhcJiHn9/O82v2AzBiaAFfuX4WgwpzXK5M
+RAaCGWcNobggm+a2LpZtOMiss7Wbr5yZeGcsFgH/BcwDLgGygGeNMbH/tP4xcDlwDbAYGAE8Fj1o
+jPECT+OEmvnAPwEfBf4jZsw44Eng78BM4CfA/xpj3hVnvSktFA7zwFJ7PFSMHl7IV2+crVAhIv3G
+7/NyQWU5AFU7j9DY0ulyRZLu4goW1tr3WmsfsNZusdZW4wSCMcBcAGNMMfDPwK3W2pesteuAjwEX
+GGPOi5zmMpwZj5ustdXW2qXA14FbjDHRGZTPALustV+1jv8GHgVuPaOvNoWEQmH+7+ktvLjeWTA1
+tryI226YTXF+tsuVichAs3iGczkkFA6zaqN24pQzc6ZrLAYBYSB6YW4uzkzE36MDrLUW51LGgshL
+84Fqa+3hmPMsBUpwLntExzzf43MtjTlHWguGQvzyyc2srK4F4KwRxdx2/SwK87JcrkxEBqKywflM
+HuPs6Ltsw0FC4bDLFUk6i2uNRSxjjAfnsscKa+3myMvlQJe1trnH8LrIseiYupMcjx7b8DZjio0x
+OdbaXs/V+XyptT41EAzxP09s5rWtzpITM3oQX75+Fnk5Cf9RJE20V6nWs1SnvsVPPUtMX/btwtkj
+2br3KIeOdrBjfxNTxw9O+udwg77XEnMm/TqTn2b3AVOBhb0Y68GZ2Tidtxvj6cWYtyguTp07K7oD
+Qe767evHQ8XMs4fybx+bR24KhIpYqdSzdKK+xU89S0xf9O1dC8bzu2e30drezarNdVwwZ3TSP4eb
+9L3WfxL6iWaMWQK8F1hkrY3dVaUWyDbGFPeYtRjOmzMQtcC5PU5ZFnMs+rGsx5jhQLO1tiueWpub
+2wkG3b83u6s7yE8eqaJ61xHAWYn9+Q9U0n6sk/ZjqbFYyufzUlyclzI9SxfqW/zUs8T0dd8WTC/n
+udf2sarqIHsPNFKUAWu+9L2WmGjfEhF3sIiEiquAd1hr9/Y4vAYIABcDf4qMn4SzwHNVZMxq4E5j
+zNCYdRaXAk3Alpgx7+lx7ksjr8clGAwRcPnJfZ1dQX7y6Aa27j0KwOyzh/Lpq6bj9Xhcr+1kUqFn
+6Uh9i596lpi+6tvCygqee20fgWCYFRtqeNe5mTNroe+1/hPvPhb3ATcA7wPajDHRWYUma22HtbbZ
+GPMr4F5jTCPOHhU/BVZaa1+LjH0W2Aw8YIy5HagAvg0ssdZ2R8b8HPicMeZu4Nc4QeWDOLMkaaW9
+M8CPH9nA9v1NAJwzeTj/cuVU/LreJyIpZvTwQsZXFLG7poVlVQe55JxReKJ7fov0Urw/3T4NFAMv
+Agdj/rs2ZsytOHtQPBoz7prowcgmWFcAQZxZjPuB3wDfiBmzB2cvjEuA9ZFzftxa2/NOkZTW1tHN
+D36//nioWDCtjE+9T6FCRFJXdCfOA4fa2FXTcx2+yOl5wpl9W1G4sbHNlemv1vZufvD7deytawVg
+4YwKPvruyXi9qZv+/X4vpaUFuNWzdKW+xU89S0x/9K29M8CXl6ykszvIohkVfOy9U/rk8/QXfa8l
+JtK3hH5g6Z/OfaC5rYvvP7T2eKi4aPZIPvqe1A4VIiIAeTl+zp0yHIBXt9TT3hlwuSJJNwoWSdbY
+0sndD61l/6E2AN51zmhuvnQSXl2nFJE0Eb0c0tkdPH57vEhvKVgkUUNzB3c/tJaaI8cAeO/8sVx/
+8UQtfhKRtHLWiGJGDi0A4KX1B08zWuREChZJcuhoO3c9uJb6xnYArlo4nmveMUGhQkTSjsfjYVFk
+1mJ3TTP76ltdrkjSiYJFEtQ1HOOuB9dyuKkDgGveMYGrFo5XqBCRtLVgWhl+n/N32PINmrWQ3lOw
+OEMHDrdx14Nrjz9q+Pp3TuTyBePcLUpE5AwV5WczZ9IwAFZvqqU7EHS5IkkXChZnYF99K99/aC1N
+bc4u4zdfOolLzxvjclUiIskRXcTZ1hFgjT3kcjWSLhQsEvRGbQvff2gtLce68QAffc9k3jlnlNtl
+iYgkzeSxpQwtyQWcx6mL9IaCRQJ2Hmzi+w+vo60jgMcDn7hi6vFkLyKSKbwxizi37j1KXeMxlyuS
+dKBgEadt+47yg9+vp70zgM/r4dNXTWfB9HK3yxIR6RMLKyuIrkNfvqHG3WIkLShYxGHLngbu/eN6
+OruC+LwePnv1dM6dPNztskRE+kxpUQ4zzxoKwMrqGgJ69LichoJFL1XvOsKPH62iqzuE3+fl89fM
+YHZkxbSISCZbNLMCgKa2Lqp3HnG5Gkl1Cha9sG77If7rsSq6AyGy/V6+9KEZzDhriNtliYj0ixln
+DaGkMBvQIk45PQWL03h9az33/WkjgWCYnGwft147k6njBrtdlohIv/F5vSysdGYtqnYdoaG5w+WK
+JJUpWLyNlzfV8rO/bCQYCpOX4+Nfr5uFGVPqdlkiIv1u0QwnWITDzloLkVNRsDiF5VUH+eVfNxMO
+Q0Gun69cP5uJI0vcLktExBXDS/OZMtb5h9XyqhpC4bDLFUmqUrA4iRfXHeD/nt5KGCjMy+K2G2Yz
+vqLY7bJERFwV3a/ncFMHW95odLkaSVUKFj0899o+7l9qASgpyOb2m+YwpqzI5apERNw3Z9JQCnL9
+ACzT49TlFBQsYvzt5Td4+O/bAefe7dtvmsPIoQUuVyUikhqy/L7jGwKu3XaIlmNdLlckqUjBAgiH
+wzyxYjePvLgTgCHFudx+0xzKB+e7XJmISGqJXg4JhsKs3ljrcjWSigZ8sAiHwzy+bBd/XrEbgOGD
+8rj9ptkMH5TncmUiIqln1LBCzhrhrDl7acNBwlrEKT0M6GARDof5wz928NTqNwAoH5zP7TfNYWiJ
+QoWIyKlEH0xWc+QYOw80u1yNpJoBGyxC4TAPPreNZ1/bB8DIYQXcftMcSotyXK5MRCS1nTdlODnZ
+PkA7ccpbDchgEQqHuf+Zrfxj7QEAxgwv5Ks3zKakINvlykREUl9utp95U8oAeHVrHe2dAZcrklQy
+4IJFMBTiV09uYVnk8b/jK4q47cbZFOUrVIiI9FZ0EWdXd4hXNte5XI2kkgEVLALBEL/862ZWb3JW
+Mk8cWcJXrp9NQW6Wy5WJiKSX8RVFjBrm3I6vyyESa8AEi+5AiJ/9eSOvbqkHYPKYQXz5upnk5fhd
+rkxEJP14PJ7jizj31Lawt67F5YokVQyIYNEdCPLff6pm3fbDAEwbV8oXPzST3GyFChGRRC2YVo7f
+5/wY0axpNt0KAAAgAElEQVSFRGV8sOjsDvKTR6uo2nkEgBlnDeELH5xBTpbP5cpERNJbYV4W55hh
+AKzeVEdXd9DliiQVZHSwaO8M8MOH17F5j/OwnDmThvG5D1SS5VeoEBFJhujlkPbOAGvsIZerkVSQ
+0cHiG/+zmq17jwLOfdefvmra8Wk7ERE5c5PHDGJ4qbOpoC6HCGR4sNiypwGAC6aX8y9XKlSIiCSb
+x+Nh0YwKAOy+o9Q2HHO5InFbxv+kvXD2SD52+RS8Xo/bpYiIZKQLKivwepy/Y5dr1mLAi/u2CGPM
+IuA2YC5QAVxtrX0i5ngBcDdwFTAE2A381Fr7i5gxOcC9wHVADrAU+Ky1tj5mzGjg58CFQAtwP3CH
+tTbU21q/cO0s5pw9hFBQD8kREekrgwpzmDlxCOu2H2ZldQ3vXzxBM8QDWCJ/8gXAeuAW4GQ/sX8E
+XArcCEwGfgwsMcZcETPmx8DlwDXAYmAE8Fj0oDHGCzyNE3zmA/8EfBT4j3gKfde8scdTtIiI9J3o
+TpzNx7rZsOOwy9WIm+IOFtbaZ6y1/26t/TNwsp/aC4DfWmuXW2v3Wmt/CWwAzgMwxhQD/wzcaq19
+yVq7DvgYcIEx5rzIOS7DCSU3WWurrbVLga8DtxhjtPmEiEiKmT5h8PGHOEYfmSADU1/MVa0C3meM
+GQFgjLkIOBvncgc4l1D8wN+jb7DWWmAvTigBZ5ai2lobG3uXAiXAtD6oWUREzoDP6+WCSmcR58Zd
+R2ho7nC5InFLX/zr//PA/wD7jTEBIAh80lq7MnK8HOiy1jb3eF9d5Fh0TM+n2tTFHNvQ22J8us7X
+a9FeqWfxUd/ip54lJtX7dtGckTy1ag9hYNXGWq5ePMHtklK+Z6nqTPrVF8HiC8A84AqcWYjFwH3G
+mIPW2n+8zfs8nHzNRk9xrcQsLs6LZ7igniVKfYufepaYVO1baWkBMycNY/22QyyvruEjV07HlyJ3
+5KVqzzJRUoOFMSYX+A5wlbX2mcjLG40xs4GvAP8AaoFsY0xxj1mL4bw5K1ELnNvj9GWRj3E9n7e5
+uZ1gsNc3kgxoPp+X4uI89SxO6lv81LPEpEPfLphezvpthzjU2M6KtfuYcdYQV+tJh56lomjfEpHs
+GYusyH89ZxWCvLmeYw0QAC4G/gRgjJkEjMFZnwGwGrjTGDM0Zp3FpUATsDmegoLBEIGAvpnioZ4l
+Rn2Ln3qWmFTu24wJQyjMy6K1vZsX1+5n6thSt0sCUrtnmSaRfSwKgIm8eUfIBGPMTKDBWrvPGPMS
+cI8xpgN4A2cfio8AXwKw1jYbY34F3GuMacTZo+KnwEpr7WuRcz6LEyAeMMbcjrNfxreBJdba7sS+
+VBER6WtZfi/nTy/n2df2sW77YZrbuiguyHa7LOlHiazOOAdYhzPzEAZ+CKwFvhU5fh3wGvA7YBPw
+VeBr1tr/iTnHrcCTwKPAi8BBnD0tAIhsgnUFzkzHKpzNsX4DfCOBekVEpB9FH0wWDIVZtbHW5Wqk
+v3nC4YzelTLc2Nim6a9e8vu9lJYWoJ7FR32Ln3qWmHTq23cfWMOOA02UD87nO5+ch8elzQrTqWep
+JNK3hP7QdP+NiIgkXXQnztqGY2zf3+RyNdKfFCxERCTpzp08nNxsH6DHqQ80ChYiIpJ0Odk+5k91
+dgl4fWs9xzq07n6gULAQEZE+EV3E2RUI8crmuLYgkjSmYCEiIn1iXHkRY4YXAnow2UCiYCEiIn3C
+4/Ecn7V4o66FN2pbXK5I+oOChYiI9Jn508rI8js/arSIc2BQsBARkT5TkJvFOWY4AC9vrqWzO+hy
+RdLXFCxERKRPLZ5ZAUB7Z5DXt9a7XI30NQULERHpU5NGD6Ks1HlSpi6HZD4FCxER6VMej+f4Tpzb
+9zdRc6TN5YqkLylYiIhInzu/sgKf13n0xHLdeprRFCxERKTPlRRkM2viUABWbqwhENQDwTKVgoWI
+iPSL6J4WLce6Wb/9sMvVSF9RsBARkX4xffxgBhfnAFrEmckULEREpF94vR4WVjq3nm7a3cDho+0u
+VyR9QcFCRET6zcIZFXiAMLCiWos4M5GChYiI9JuhJXlMGz8YgOVVNYRCYZcrkmRTsBARkX4V3dOi
+saWTjbsbXK5Gkk3BQkRE+tWss4dSlJ8FaBFnJlKwEBGRfuX3eblgurOIc8OOwzS1drpckSSTgoWI
+iPS7RZEHkwVDYVZtrHW5GkkmBQsREel3FUMKmDSqBHAuh4TDWsSZKRQsRETEFdGdOOsa29m276jL
+1UiyKFiIiIgrzpk8nLwcP6BFnJlEwUJERFyRk+Vj/rQyAF63h2jr6Ha5IkkGBQsREXHN4hnO5ZDu
+QIiXN9W5XI0kg4KFiIi4Zmx5EWPLigB4ab0WcWYCBQsREXHV4sitp/sPtbKntsXlauRMKViIiIir
+5k0tJ9vv/DjSIs70p2AhIiKuys/1c+7k4QC8vLmOjq6AyxXJmVCwEBER10X3tOjsCvLa1nqXq5Ez
+oWAhIiKuO3tUCRVD8gFYvqHG5WrkTPjjfYMxZhFwGzAXqACuttY+0WPMFOAu4B2Rz7EJuMZauz9y
+PAe4F7gOyAGWAp+11tbHnGM08HPgQqAFuB+4w1obirdmERFJbR6Ph0UzRvDHF3aw40ATBw61MnJY
+odtlSQISmbEoANYDtwBvuS/IGHMWsBzYDCwGKoFvAx0xw34MXA5cExkzAngs5hxe4GmcUDIf+Cfg
+o8B/JFCviIikgfOnl+PzegBYXqVZi3QV94yFtfYZ4BkAY4znJEP+E3jKWvu1mNd2R39hjCkG/hm4
+3lr7UuS1jwFbjDHnWWtfBS4DJgMXWWsPA9XGmK8Ddxljvmmt1coeEZEMU1yQzeyzh/K6PcSqjbVc
+846zyPLrin26SeqfWCRoXA5sN8Y8Y4ypM8a8bIy5KmbYXJxA8/foC9ZaC+wFFkRemg9UR0JF1FKg
+BJiWzJpFRCR1LJ7lLOJsbe9m3fZDLlcjiYh7xuI0hgOFwO3A/wO+CrwHeNwYc6G1djlQDnRZa5t7
+vLcucozIx557u9bFHNvQ24J8PqXd3or2Sj2Lj/oWP/UsMQOhbzMmDmVoSS6HmzpYXlXD+ZUVZ3S+
+gdCzvnAm/Up2sIhW8mdr7U8jv64yxpwPfBpn7cWpeDjJmo2TiGu/1+LivHiGC+pZotS3+Klnicn0
+vl06fxwPLd3Kpt0NdIagfEjBGZ8z03uWSpIdLA4DAWBLj9e3ABdEfl0LZBtjinvMWgznzVmJWuDc
+Hucoi3yM6yk1zc3tBIO6kaQ3fD4vxcV56lmc1Lf4qWeJGSh9O3fSUB5+FsJh+OuynXzwwrMSPtdA
+6VmyRfuWiKQGC2tttzHmNcD0ODQJeCPy6zU44eNi4E8AxphJwBhgVWTMauBOY8zQmHUWlwJNOHeb
+9FowGCIQ0DdTPNSzxKhv8VPPEpPpfSspyKZywhCqdh5h2foDXHn+WHzeM7uUkek9SyWJ7GNRAEzE
+uXQBMMEYMxNosNbuA+4Bfm+MWQ68gLPG4gqcPS2w1jYbY34F3GuMacTZo+KnwEpr7WuRcz6LEyAe
+MMbcjrNfxreBJdba7sS+VBERSReLZoygaucRjrZ2Ub2rgVkTh7pdkvRSIhHwHGAdzsxDGPghsBb4
+FoC19s846ym+ClTh3Fr6AWvt6phz3Ao8CTwKvAgcxNnTgsg5QjhhJIgzi3E/8BvgGwnUKyIiaWbm
+xCEUF2QDsFwPJksrnnA4rrWQ6Sbc2Nim6a9e8vu9lJYWoJ7FR32Ln3qWmIHWt0de3MHfXt6L1+Ph
+B7ecz6DCnLjPMdB6liyRvp1sr6rT0v03IiKSkhbPcPa0CIXDrKzWTpzpQsFCRERSUtngfMzoQYDz
+YLJQZs+wZwwFCxERSVmLI49Trz/ajt171OVqpDcULEREJGXNNcPIz3FuYFymRZxpQcFCRERSVnaW
+jwXTnKc9rLH1tLZrx4FUp2AhIiIpbdFM53khgWCY1ZtqXa5GTkfBQkREUtqYsiLGVxQBzuWQDN8m
+Ie0pWIiISMpbFFnEeeBQG7tqej4cW1KJgoWIiKS8eVPKyM5yfmRpJ87UpmAhIiIpLy/Hz3mTnYdc
+v7K5nvbOgMsVyakoWIiISFpYPMu5HNLZHeS1rfUuVyOnomAhIiJp4awRxYwYWgBoT4tUpmAhIiJp
+wePxsHiGc+vproPN7K9vdbkiORkFCxERSRsLppfj9zkP3VxWpVmLVKRgISIiaaMoP5s5k4YBsHpj
+Ld2BoMsVSU8KFiIiklaie1q0dQRYs+2Qy9VITwoWIiKSVqaMLWVoSS7gPE5dUouChYiIpBWvx3N8
+1mLLG43UNx5zuSKJpWAhIiJpZ2FlBR5nDSfLqzRrkUoULEREJO2UFuUwY8IQAFZU1RAMhVyuSKIU
+LEREJC1Fd+JsauuiaucRl6uRKAULERFJSzPOGkJJYTYAy9ZrT4tUoWAhIiJpyef1srDS2YmzatcR
+Gls6Xa5IQMFCRETS2KLIFt/hMKyo1iLOVKBgISIiaWt4aT5TxpYCsHzDQULhsMsViYKFiIiktUUz
+nVmLw00dbHmj0eVqRMFCRETS2txJwyjI9QPOrIW4S8FCRETSWpbfx4Jp5QCs3XaIlmNdLlc0sClY
+iIhI2lsc2eI7EAyzemOty9UMbAoWIiKS9kYNL2TCiGIAllXVENYiTtcoWIiISEaIzlocPNzGzoPN
+LlczcClYiIhIRjhvynBysn0ALNMiTtcoWIiISEbIzfYzb8pwAF7dUkd7Z8DligYmf7xvMMYsAm4D
+5gIVwNXW2idOMfYXwCeBL1lrfxrzeimwBLgCCAGPAV+01rbFjJkRGXMuUA8ssdbeE2+9IiIycCya
+OYJlG2ro6g7xypY6LjlntNslDTiJzFgUAOuBW4BTro4xxlwNnAccOMnhh4ApwMXA5cBi4Bcx7y0C
+lgK7gTk4QeabxphPJFCviIgMEBMqihk5rADQnhZuiTtYWGufsdb+u7X2z4DnZGOMMSOBnwI3AoEe
+xyYDlwEft9a+bq1dBXweuN4YUx4ZdjOQFRmzxVr7x8j5vhxvvSIiMnB4PJ7jizh317Swt67F5YoG
+nqSvsTDGeID7ge9ba7ecZMgCoNFauy7mtedxZj/mRX4/H1hmrY0NJUud05uSZNcsIiKZY8G0cvw+
+58fbi+tONmkufakvFm/eAXRZa5ec4ng5zpqJ46y1QaAhciw6pq7H++pijomIiJxUYV4Wc80wAFZt
+rKWzO+hyRQNL3Is3344xZi7wBWB2Am/38DZrNnjzsktcu574fLrxpbeivVLP4qO+xU89S4z61nsX
+zRnJK5vrONYRYHXVQeacPdTtktLKmXyPJTVYAAuBYcA+Y0z0NR9wrzHmS9baCUAtMDz2TcYYH1Aa
+OUbkY1mPc0ff03Mm420VF+fFM1xQzxKlvsVPPUuM+nZ6C0ryqfibpeZIG0tfeYML5+rukP6S7GBx
+P/Bcj9eejbz+f5HfrwYGGWNmx6yzuBhnRuLVmDH/aYzxRS6TAFwKWGttUzwFNTe3EwyG4vwyBiaf
+z0txcZ56Fif1LX7qWWLUt/gsnFHOIy/sZOPOI9jdhxk+SIGst6Lfa4lIZB+LAmAib16amGCMmQk0
+WGv3AY09xncDtdba7QDW2q3GmKXAL40xnwGygf8CHrbWRmcsHgL+Hfi1MeZuoBLnEssX4603GAwR
+COh/wHioZ4lR3+KnniVGfeudBdPKeezFXYTCYR59YQefuHwqXu9Jb2aUJErkIso5wDpgDc56hx8C
+a4FvnWL8ydZE3Ahsxbkb5ElgGfCp6EFrbTPOLanjgNeBe4BvWmt/lUC9IiIyAA0qzOGcyE6cL2+q
+42d/2Uh3QAs5+5onw58AF25sbFOy7yW/30tpaQHqWXzUt/ipZ4lR3+LXGQiy5PGNbNp1BIDJYwbx
+uQ/MID832SsBMkvkey2h6R0tLRYRkYxVkJvFt/5lAXMmObefbt17lO8/tJam1k6XK8tcChYiIpLR
+crJ8fP6Dlcd35Nxb38p3HlhDXeMxlyvLTAoWIiKS8XxeL//0bsOV548D4HBTB999YA17apvdLSwD
+KViIiMiA4PF4eP/iCdz0rkl4gJZj3dz90Do27Wlwu7SMomAhIiIDysVzR/Gpq6bh83ro7Ary4z9u
+4NUtce29KG9DwUJERAac86aUceu1M8nN9hEMhfnFXzbx/Ov73C4rIyhYiIjIgDR13GBuv3EOxflZ
+hIGHnt/O48t2kuHbMPQ5BQsRERmwxpYX8bUPz2XYoFwAnlz1Br/521aCIe0TkigFCxERGdDKSvO5
+8+a5jBleCMDyqhru+9NGuvS49YQoWIiIyIBXUpjD7TfNYfKYQQCs236YH/5hPW0d3S5Xln4ULERE
+RIC8HD+3XjuLc4yzS+f2/U3c9eBaGlu0S2c8FCxEREQisvxePn3VdC6aMxKAA4fa+O4Dr1NzpM3l
+ytKHgoWIiEgMr9fDze+axNWLxgNwpLmT7/1uLbsOapfO3lCwEBER6cHj8fC+C8bzkXcbPB5obe/m
++w+vpTrylFQ5NQULERGRU7hw1kg+e3Ulfp+Xru4QP320itUba90uK6UpWIiIiLyNuWYY/3rdTPJy
+/ARDYX755GaWvrrX7bJSloKFiIjIaZgxpdxx0xxKCrIB+MM/dvDHF3Zol86TULAQERHphdHDC7nz
+w3MpK80D4JlX9vLrp7YQCGqXzlgKFiIiIr00bFAeX/vwXMaVFwGwcmMtSx6vprNLu3RGKViIiIjE
+oTg/m6/eOJtp4wcDULXzCD/4/Tpa27VLJyhYiIiIxC03288XPziDeVPLANh5sJnv/W4NR5o6XK7M
+fQoWIiIiCfD7vHzyyqlccs4oAGqOHOO7v1vDgUOtLlfmLgULERGRBHk9Hm64+GyueccEABpbOrnr
+wbXs2N/kcmXuUbAQERE5Ax6Ph8sXjONj752M1+OhrSPAPb9fx/rth90uzRUKFiIiIkmwaMYIPndN
+Jdl+L92BEEser2Z51UG3y+p3ChYiIiJJMmviUL5y/WwKcv2EwmH+7+mtPLV6z4DaSEvBQkREJIkm
+jirhjpvmUFqUA8BjL+3i93/fQWiAhAsFCxERkSQbOayQO2+eS8WQfACee30fv/zr5gGxS6eChYiI
+SB8YUpLL126ey1kjigF4ZXMdP3lkA+2dAZcr61sKFiIiIn2kMC+Lr1w/mxlnDQFg055G7nl4Hc3H
+ulyurO8oWIiIiPShnGwfn/tAJedPLwdgT20L33tgDYePtrtcWd9QsBAREeljfp+Xj18+hffMGwNA
+XWM73/ndGvbVZ94unQoWIiIi/cDj8fChiyZy3TsnAtDU2sVdD67B7m10ubLkUrAQERHpR5edN4ZP
+XjEVn9dDe2eQH/5hA2vsIbfLShp/vG8wxiwCbgPmAhXA1dbaJyLH/MB3gPcAE4Am4HngDmttTcw5
+SoElwBVACHgM+KK1ti1mzIzImHOBemCJtfaeBL5GERGRlLJgejmF+Vn895+q6eoOcd+fq/nwZYYL
+Z410u7QzlsiMRQGwHrgF6LnbRz4wC/gWMBt4P2CAv/QY9xAwBbgYuBxYDPwietAYUwQsBXYDc3CC
+zDeNMZ9IoF4REZGUUzlhCLfdMJvCvCzCYbj/GcsTK3an/S6dnjP5AowxIWJmLE4x5hzgFWCstXa/
+MWYKsAmYa61dFxlzGfAUMMpaW2uM+QzwbaDcWhuIjPkecJW1dmocJYYbG9sIBDJ/Q5Jk8Pu9lJYW
+oJ7FR32Ln3qWGPUtfunQs5ojbdz7h/Ucae4E4KI5I7npkkl4vR7Xaor0LaEC+mONxSCcmY2jkd/P
+BxqjoSLi+ciYeTFjlkVDRcRSwBhjSvq4XhERkX5TMaSAOz98DiOHFQDwwtoD/PwvG+lO0SB0OnGv
+sYiHMSYHuAt4yFobvaemHGfNxHHW2qAxpiFyLDpmV4/T1cUc6/WD7n0+rU/trWiv1LP4qG/xU88S
+o77FL116Nqw0j3/7yDn86I8b2LbvKK/bQ7R1bOBL184kL6dPf1Sf1Jn0q8+qjSzkfARnJuKzvXiL
+h7eu2eh5nNOMeYvi4rx4hgvqWaLUt/ipZ4lR3+KXDj0rLYXv3rKQex54nVc21bLljUbufnAd3/zk
+fEqLc90ur9f6JFjEhIrRwDtjZisAaoHhPcb7gNLIseiYsh6njb6njjg0N7cTHAAPfUkGn89LcXGe
+ehYn9S1+6lli1Lf4pWPPPn3VVHKzvLy0/iC7DjbxlZ8s47YbZ1M2OL/faoj2LRFJDxYxoWICcJG1
+tufOH6uBQcaY2THrLC7GmZF4NWbMfxpjfNbaYOS1SwFrre31ZRCAYDCUsgt2UpV6lhj1LX7qWWLU
+t/ilW88+cpmhKD+bJ1ftof5oO9/+zWvceu0sxpYXuV3aacV9V4gxpgCYiBME1gJfBl4AGoCDwOM4
+t5xewYlrKRqstd2RczyNMwPxGSAb+DXwqrX2w5HjxcBW4DngbqAS+BXOXhe/iqNc3RUSh3RYPZ2K
+1Lf4qWeJUd/il+49e/71fTz8/HbCOM8c+fwHKpk6bnCff97+vivkHGAdsAZnvcMPcQLGt4BRwJWR
+j+txgkZN5OOCmHPciBMcngeeBJYBn4oetNY2A5cB44DXgXuAb8YZKkRERNLaJeeM5lNXTcPn9dDZ
+FeTHj2zg1S1xrQjod2e0j0Ua0IxFHNI92btFfYufepYY9S1+mdKzTXsaWPJ4NZ1dQTzAje+axMVz
+R/XZ50v1fSxERETkDEwbN5g7bpxDcX4WYeDB57bx+LJdKblLp4KFiIhIGhhbXsTXPjyXYYOcW0+f
+XLWH3z6zlWAotWZiFCxERETSRFlpPnfePJfRwwsBWLahhvv+tJGu7uBp3tl/FCxERETSSElhDrff
+OIfJYwYBsG77Ye79w3qOdXS7XJlDwUJERCTN5Of6ufXamZxjhgGwbX8T33twLY0tnS5XpmAhIiKS
+lrL8Pj591XQumj0SgAOH2vjuA2uoOdLmal0KFiIiImnK6/Vw86WTuHrheACONHfwvd+tZdfBZvdq
+cu0zi4iIyBnzeDy8b+F4PnKZweOB1vZu7nl4HRt3HXGlHgULERGRDHDh7JF89urp+H1eOruD/OTR
+KlZvqj39G5NMwUJERCRDzDXD+dfrZpKX4yMYCvPLv27m2Vf39msNChYiIiIZxIwp5fYb51BSkA3A
+7/+xg0de2NFvu3QqWIiIiGSYMWVF3PnhuQwvzQPgb6/s5ddPbSEQ7PtdOhUsREREMtCwQXncefNc
+xpUXAbByY63zILM+3qVTwUJERCRDFRdkc9sNs5k2rhSAqp1H+MHD62ht77tdOhUsREREMlhejp8v
+fmgm86aWAbDzYDPf+90aGpo7+uTzKViIiIhkOL/PyyevnMolc0cBUHPkGN95YA0HDid/l04FCxER
+kQHA6/FwwyVnc807JgDQ2NLJXb9bw44DTcn9PEk9m4iIiKQsj8fD5QvG8bH3TMbr8dDWEeAHD69j
+/Y7DSfscChYiIiIDzKKZI/jcByrJ8nvpCoRY8lg1K6pqknJuBQsREZEBaNbZQ/nK9bPIz/ETCof5
+9dNbePrlN854Iy0FCxERkQHq7FGD+NrNcygtygHg0Rd38od/7CB0BuFCwUJERGQAGzmskDtvnkvF
+kHwAnn1tH7/486aEz6dgISIiMsANKcnlazfPZcKIYoAzeiqqgoWIiIhQmJfFbdfPpnLCkDM6jz9J
+9YiIiEiay8n28flrKnlx/cGEz6EZCxERETnO7/Py7nljEn6/goWIiIgkjYKFiIiIJI2ChYiIiCSN
+goWIiIgkjYKFiIiIJI2ChYiIiCSNgoWIiIgkTdwbZBljFgG3AXOBCuBqa+0TPcb8B/AJYBCwEviM
+tXZHzPFSYAlwBRACHgO+aK1tixkzIzLmXKAeWGKtvSfeekVERKT/JDJjUQCsB24B3vL4M2PM7cDn
+gE8B5wFtwFJjTHbMsIeAKcDFwOXAYuAXMecoApYCu4E5OEHmm8aYTyRQr4iIiPSTuGcsrLXPAM8A
+GGM8JxnyReDb1tq/RsZ8BKgDrgb+aIyZAlwGzLXWrouM+TzwlDHmK9baWuBmIAv4uLU2AGwxxswG
+vgz8b7w1i4iISP9I6hoLY8x4oBz4e/Q1a20z8AqwIPLSfKAxGioinseZ/ZgXM2ZZJFRELXU+hSlJ
+Zs0iIiKSPMl+CFk5TkCo6/F6XeRYdEx97EFrbdAY09BjzK6TnCN6rKm3Bfl8Wp/aW9FeqWfxUd/i
+p54lRn2Ln3qWmDPpV3893dTDSdZjxDkmetnldOc54T3FxXlxDBcA9Swx6lv81LPEqG/xU8/6T7Ij
+XC1OACjr8fpw3pxxqI38/jhjjA8ojRyLjjnZOeCtsyEiIiKSIpIaLKy1u3FCwcXR14wxxThrJ1ZF
+XloNDIosxoy6GCeQvBozZnEkcERd6nwK2+vLICIiItK/POFwPFcWwBhTAEzECQJrce7UeAFosNbu
+M8Z8Fbgd+Cj8//buPcjKuo7j+BsYM9TURvAKg3n75AWxAW8pmPdQ8x7lrUGDwjF1MCtRENSxQRHS
+TNIxUdFJItPUzBtYu4kX5BJJwVe7mKamBqbNqlxk++P3HDkcluUsPvCcs/t5zZw5+/ye5zx8l9nd
+8z3f342XgauAPYE9I2Jpdo/fkioQ5wKfAiYBMyPirOz85sBC4AngGqA3cBtprYvb1v3bNTMzs/Vp
+XSoW/YC5wGzSeIfxpATjCoCIuBa4kbQuxXNAV2BgKanInE5KHKYBvwEaSetekN3jPdKU1B2BWcA4
+YIyTCjMzs9rW5oqFmZmZ2Zp4/o2ZmZnlxomFmZmZ5caJhZmZmeXGiYWZmZnlxomFmZmZ5caJhZmZ
+meVmQ+0VskFJOg+4mLRh2Tzg/Ih4vtioapuk/sD3gL7AdsCJEfFgsVHVNkkjgJOAzwMfkFaX/UFE
+vIiSscEAAAjYSURBVFhoYDVM0jDSwng7Zk1/Bq6MiEcLC6rOZD93VwPXR8RFRcdTqySNBkZXNC+M
+iD2KiKeeSNqetDjlQGAT4CXg7IiYU83r213FQtLXSIt2jQa+QEosHpPUrdDAat+mwB+B82jbRm8d
+WX/SYnD7A0cAGwGPS/JuR2v2Kmll3r7Z40ngAUm7FxpVnZC0LzCU9HfN1m4+ad+pbbPHwcWGU/sk
+bQnMAJaQFqrcHfgu8E6192iPFYvhwC0RMRk+/oR0LHAOcG2RgdWy7BPjowCSOq3lcgMi4pjyY0mD
+gbdIb5hPFRFTrYuIhyuaRko6FzgAWFBASHVD0mbA3cAQYFTB4dSL5RHxdtFB1JlLgFciYkhZ2z/b
+coN2VbGQtBHpj/r0UltENJOWDj+wqLisw9iSVO1ZXHQg9UBSZ0lfJ5Vanyk6njpwE/BQRDxZdCB1
+ZFdJr0n6m6S7JfUsOqA68BVglqSpkt6UNEfSkLW+qky7SiyAbkAXVt9a/U1SGcxsvciqPNcDT0XE
+X4qOp5ZJ2kvS/0il1onASRGxsOCwalqWgO0DjCg6ljryLGkzzKOBYcDngMZsI01bs51I46CCtKv4
+zcCPJZ1Z7Q3aY1dISzrhcQO2fk0E9gAOKjqQOrAQ6EOq8JwCTJY0wMlFyyT1ICWtR0bEsqLjqRcR
+8VjZ4XxJM0kl/UHA7cVEVRc6k3YbL3W3zZO0JynZuLuaG7S3xOI/wEekwTrltmb1KoZZLiT9BDgG
+6B8RbxQdT62LiOXA37PDOZL2Ay4k/eGy1fUFugOzy8Y/dQEGSPoOsHHW5WutiIh3Jb0I7FJ0LDXu
+DVYf77QAOLnaG7SrrpAsm58NHF5qy34RDydNBTTLVZZUnAAcGhGvFB1PneoMbFx0EDVsGtCb1BXS
+J3vMIn167OOkojrZ4NedSW+ctmYzAFW0iTYM4GxvFQuACcCdkmYDM0mzRDYB7igyqFqX9TvuQuo2
+AthJUh9gcUS8WlxktUvSROA04HigSVKpUvZuRHxYXGS1S9LVwCOkaaefAc4ADiH15VoLIqIJWGXc
+jqQmYFFEeCbNGkgaBzxEekPcAbgCWA7cU2RcdeBHwIxsvZSppOn0Q0jTnKvSrioWABExlTTn9kpg
+LrA3cLSnHK1VP9L/12zSeJTxwBzSL6O1bBiwOfB74PWyx6ACY6p12wCTSeMsppHK/Ed5pkObuUqx
+dj2An5N+1qYAbwMHRMSiQqOqcRExi7Tw32nAC8BlwIURMaXae3RqbvbPp5mZmeWj3VUszMzMrDhO
+LMzMzCw3TizMzMwsN04szMzMLDdOLMzMzCw3TizMzMwsN04szMzMLDdOLMzMzCw3TizMzMwsN+1x
+rxAzq5KkLYB3gMERMbnoeDYESYOBSUC3iFhccDhm7Y4rFmbW0TTjvTbM1hsnFmZmZpYbd4WYdSCS
+hgKXAlsDTwOXVJw/C/gWsAfQCZgHfD8ins/O987ajijfkVRSZ9JW6HdFxCr3bCGGkcDQiOiVHXci
+dcd8EBHblV33OnBdREzIjncArgGOBjYFngeGR8ScivsPBoYDuwGLgDuA0RHxUSsxnQ3cDAyLiNtb
+i9/MWueKhVkHIek44BZgOnBi9vxLVu0W2BG4EziVtG3yK0CDpF0AIuIF4DngmxW3HwhsC9xWRSiN
+QA9JvbLjfYCuQDdJymLdlbTFemN2vCUwA9gbOA84GWgCpkvqVvY9XgTcCjwCHAeMBS4Armrl/+V8
+YCJwppMKs0/OFQuzjuMyoCEihmTHT0jqCowsXRARH78BZ5WEacB+wOCy624FbpS0RUS8m7WdDTwd
+ES9VEcdzwFJgAHBX9jyTlFwcAkT23ASUqhHDgc2BvhGxKItvOvAScDFwiaTNgDHA2IgYlb1uuqRl
+wHhJ4yLinfJAJI0ARgGnRsTDVcRuZmvhioVZB5B1VfQFfl1x6l5Sl0fput0l3S/p38BHwDJSl8Ju
+Za+ZAiwHTs9esxWpOvCzamKJiCWkbowBWdMAoCF7HJK19QeeiYgV2fGRwO+A/0rqIqkLqdLSAOyb
+XXMQqYvk3tI12XXTgU2AvSpC+SEwAjjWSYVZfpxYmHUM3UkVyrcq2t8sfZF94n8c6EmqEBwM9AP+
+BHy6dF1EvA/cw8rukLOAJaRulWo1sDKxOJjU5fEHVk02Gsuu70bqvllW9lgKnAn0yK7ZipQkza24
+7kVSEtKz7H6dgFOAF0hdLGaWE3eFmHUMb5OqDFtXtG9T9vWBwPbAwIiYX2rM1rp4teJ1twJDJfUh
+dZP8Iks4qtUIXCrpMOCzpDf3jYHtJB0K9CIlGiWLSd0eIymrsGSWlF0DKQH5Vwv/5j/Kvm4Gjgfu
+A+6TdEJrgzvNrHpOLMw6gIhYIWkOcBJwQ9mpr7Jy8GbX7HlZ6aSkL5IGdM4vew0RMVvSvOxevYFz
+2xjS06SullHA3IhoApokLQAuJyULz5ZdPw04A1gYER+0cs/3gZ4R8WAVMQQru1imSBoUEV7fwuwT
+cmJh1nFcDTwgaRJpnERfUldCybOkAZMTJY0ldTGMoeVP/5CqFjcBCyLimbYEEhFNkuaSxlSMLzvV
+SEpSnoqIpWXtE0hjOhol3UCardId2B94LSJuiIj3JF0OjJPUk5QwrAB2JlUnTo6IDyvimC/pKOBJ
+YLKkbzi5MPtkPMbCrIOIiIeAbwOHAfcDRwCDys6/RZpm2p00yPMC0poWf13DLe/PnietY0gNpGpJ
+YwttDRWxLwYOII2fGAs8Rko2epFmmZSum0DqmvkS8CtgKjCElTNRVhMRc4Evk5KPm9fxezGzTKfm
+ZifnZtZ2ks4BfkrqeqgcFGpmHZS7QsysTbKFrXYjDaSc4qTCzMo5sTCzthpDWpVzBmlxqlVka0es
+SXPZ2hRm1g65K8TMciVpBWmcROW0UICXI2KnDRySmW1ArliYWd76tXJuSSvnzKwdcMXCzMzMcuPp
+pmZmZpYbJxZmZmaWGycWZmZmlhsnFmZmZpYbJxZmZmaWGycWZmZmlhsnFmZmZpab/wNHhpB0AyyQ
+FQAAAABJRU5ErkJggg==
+"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Quiz:-Combining-Pandas-DataFrames">Quiz: Combining Pandas DataFrames<a class="anchor-link" href="#Quiz:-Combining-Pandas-DataFrames">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[229]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+
+<span class="n">subway_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;UNIT&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;R003&#39;</span><span class="p">,</span> <span class="s1">&#39;R003&#39;</span><span class="p">,</span> <span class="s1">&#39;R003&#39;</span><span class="p">,</span> <span class="s1">&#39;R003&#39;</span><span class="p">,</span> <span class="s1">&#39;R003&#39;</span><span class="p">,</span> <span class="s1">&#39;R004&#39;</span><span class="p">,</span> <span class="s1">&#39;R004&#39;</span><span class="p">,</span> <span class="s1">&#39;R004&#39;</span><span class="p">,</span>
+             <span class="s1">&#39;R004&#39;</span><span class="p">,</span> <span class="s1">&#39;R004&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;DATEn&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;05-01-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-02-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-03-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-04-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-05-11&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;05-01-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-02-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-03-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-04-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-05-11&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;hour&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="s1">&#39;ENTRIESn&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">4388333</span><span class="p">,</span>  <span class="mi">4388348</span><span class="p">,</span>  <span class="mi">4389885</span><span class="p">,</span>  <span class="mi">4391507</span><span class="p">,</span>  <span class="mi">4393043</span><span class="p">,</span> <span class="mi">14656120</span><span class="p">,</span>
+                 <span class="mi">14656174</span><span class="p">,</span> <span class="mi">14660126</span><span class="p">,</span> <span class="mi">14664247</span><span class="p">,</span> <span class="mi">14668301</span><span class="p">],</span>
+    <span class="s1">&#39;EXITSn&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="mi">2911002</span><span class="p">,</span>  <span class="mi">2911036</span><span class="p">,</span>  <span class="mi">2912127</span><span class="p">,</span>  <span class="mi">2913223</span><span class="p">,</span>  <span class="mi">2914284</span><span class="p">,</span> <span class="mi">14451774</span><span class="p">,</span>
+               <span class="mi">14451851</span><span class="p">,</span> <span class="mi">14454734</span><span class="p">,</span> <span class="mi">14457780</span><span class="p">,</span> <span class="mi">14460818</span><span class="p">],</span>
+    <span class="s1">&#39;latitude&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">40.689945</span><span class="p">,</span>  <span class="mf">40.689945</span><span class="p">,</span>  <span class="mf">40.689945</span><span class="p">,</span>  <span class="mf">40.689945</span><span class="p">,</span>  <span class="mf">40.689945</span><span class="p">,</span>
+                  <span class="mf">40.69132</span> <span class="p">,</span>  <span class="mf">40.69132</span> <span class="p">,</span>  <span class="mf">40.69132</span> <span class="p">,</span>  <span class="mf">40.69132</span> <span class="p">,</span>  <span class="mf">40.69132</span> <span class="p">],</span>
+    <span class="s1">&#39;longitude&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">73.872564</span><span class="p">,</span> <span class="o">-</span><span class="mf">73.872564</span><span class="p">,</span> <span class="o">-</span><span class="mf">73.872564</span><span class="p">,</span> <span class="o">-</span><span class="mf">73.872564</span><span class="p">,</span> <span class="o">-</span><span class="mf">73.872564</span><span class="p">,</span>
+                  <span class="o">-</span><span class="mf">73.867135</span><span class="p">,</span> <span class="o">-</span><span class="mf">73.867135</span><span class="p">,</span> <span class="o">-</span><span class="mf">73.867135</span><span class="p">,</span> <span class="o">-</span><span class="mf">73.867135</span><span class="p">,</span> <span class="o">-</span><span class="mf">73.867135</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="n">weather_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;DATEn&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;05-01-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-01-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-02-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-02-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-03-11&#39;</span><span class="p">,</span>
+              <span class="s1">&#39;05-03-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-04-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-04-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-05-11&#39;</span><span class="p">,</span> <span class="s1">&#39;05-05-11&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;hour&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="s1">&#39;latitude&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">40.689945</span><span class="p">,</span>  <span class="mf">40.69132</span> <span class="p">,</span>  <span class="mf">40.689945</span><span class="p">,</span>  <span class="mf">40.69132</span> <span class="p">,</span>  <span class="mf">40.689945</span><span class="p">,</span>
+                  <span class="mf">40.69132</span> <span class="p">,</span>  <span class="mf">40.689945</span><span class="p">,</span>  <span class="mf">40.69132</span> <span class="p">,</span>  <span class="mf">40.689945</span><span class="p">,</span>  <span class="mf">40.69132</span> <span class="p">],</span>
+    <span class="s1">&#39;longitude&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">73.872564</span><span class="p">,</span> <span class="o">-</span><span class="mf">73.867135</span><span class="p">,</span> <span class="o">-</span><span class="mf">73.872564</span><span class="p">,</span> <span class="o">-</span><span class="mf">73.867135</span><span class="p">,</span> <span class="o">-</span><span class="mf">73.872564</span><span class="p">,</span>
+                  <span class="o">-</span><span class="mf">73.867135</span><span class="p">,</span> <span class="o">-</span><span class="mf">73.872564</span><span class="p">,</span> <span class="o">-</span><span class="mf">73.867135</span><span class="p">,</span> <span class="o">-</span><span class="mf">73.872564</span><span class="p">,</span> <span class="o">-</span><span class="mf">73.867135</span><span class="p">],</span>
+    <span class="s1">&#39;pressurei&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">30.24</span><span class="p">,</span>  <span class="mf">30.24</span><span class="p">,</span>  <span class="mf">30.32</span><span class="p">,</span>  <span class="mf">30.32</span><span class="p">,</span>  <span class="mf">30.14</span><span class="p">,</span>  <span class="mf">30.14</span><span class="p">,</span>  <span class="mf">29.98</span><span class="p">,</span>  <span class="mf">29.98</span><span class="p">,</span>
+                   <span class="mf">30.01</span><span class="p">,</span>  <span class="mf">30.01</span><span class="p">],</span>
+    <span class="s1">&#39;fog&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="s1">&#39;rain&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="s1">&#39;tempi&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">52.</span> <span class="p">,</span>  <span class="mf">52.</span> <span class="p">,</span>  <span class="mf">48.9</span><span class="p">,</span>  <span class="mf">48.9</span><span class="p">,</span>  <span class="mf">54.</span> <span class="p">,</span>  <span class="mf">54.</span> <span class="p">,</span>  <span class="mf">57.2</span><span class="p">,</span>  <span class="mf">57.2</span><span class="p">,</span>  <span class="mf">48.9</span><span class="p">,</span>  <span class="mf">48.9</span><span class="p">],</span>
+    <span class="s1">&#39;wspdi&#39;</span><span class="p">:</span> <span class="p">[</span>  <span class="mf">8.1</span><span class="p">,</span>   <span class="mf">8.1</span><span class="p">,</span>   <span class="mf">6.9</span><span class="p">,</span>   <span class="mf">6.9</span><span class="p">,</span>   <span class="mf">3.5</span><span class="p">,</span>   <span class="mf">3.5</span><span class="p">,</span>  <span class="mf">15.</span> <span class="p">,</span>  <span class="mf">15.</span> <span class="p">,</span>  <span class="mf">15.</span> <span class="p">,</span>  <span class="mf">15.</span> <span class="p">]</span>
+<span class="p">})</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[230]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">combine_dfs</span><span class="p">(</span><span class="n">subway_df</span><span class="p">,</span> <span class="n">weather_df</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Fill in this function to take 2 DataFrames, one with subway data and one with weather data,</span>
+<span class="sd">    and return a single dataframe with one row for each date, hour, and location. Only include</span>
+<span class="sd">    times and locations that have both subway data and weather data available.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">merged</span> <span class="o">=</span> <span class="n">subway_df</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">weather_df</span><span class="p">,</span><span class="n">on</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="bp">None</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[231]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">subway_df</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[231]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>DATEn</th>
+      <th>ENTRIESn</th>
+      <th>EXITSn</th>
+      <th>UNIT</th>
+      <th>hour</th>
+      <th>latitude</th>
+      <th>longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>05-01-11</td>
+      <td>4388333</td>
+      <td>2911002</td>
+      <td>R003</td>
+      <td>0</td>
+      <td>40.689945</td>
+      <td>-73.872564</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>05-02-11</td>
+      <td>4388348</td>
+      <td>2911036</td>
+      <td>R003</td>
+      <td>0</td>
+      <td>40.689945</td>
+      <td>-73.872564</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>05-03-11</td>
+      <td>4389885</td>
+      <td>2912127</td>
+      <td>R003</td>
+      <td>0</td>
+      <td>40.689945</td>
+      <td>-73.872564</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>05-04-11</td>
+      <td>4391507</td>
+      <td>2913223</td>
+      <td>R003</td>
+      <td>0</td>
+      <td>40.689945</td>
+      <td>-73.872564</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>05-05-11</td>
+      <td>4393043</td>
+      <td>2914284</td>
+      <td>R003</td>
+      <td>0</td>
+      <td>40.689945</td>
+      <td>-73.872564</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>05-01-11</td>
+      <td>14656120</td>
+      <td>14451774</td>
+      <td>R004</td>
+      <td>0</td>
+      <td>40.691320</td>
+      <td>-73.867135</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>05-02-11</td>
+      <td>14656174</td>
+      <td>14451851</td>
+      <td>R004</td>
+      <td>0</td>
+      <td>40.691320</td>
+      <td>-73.867135</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>05-03-11</td>
+      <td>14660126</td>
+      <td>14454734</td>
+      <td>R004</td>
+      <td>0</td>
+      <td>40.691320</td>
+      <td>-73.867135</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>05-04-11</td>
+      <td>14664247</td>
+      <td>14457780</td>
+      <td>R004</td>
+      <td>0</td>
+      <td>40.691320</td>
+      <td>-73.867135</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>05-05-11</td>
+      <td>14668301</td>
+      <td>14460818</td>
+      <td>R004</td>
+      <td>0</td>
+      <td>40.691320</td>
+      <td>-73.867135</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[232]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">weather_df</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[232]:</div>
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>DATEn</th>
+      <th>fog</th>
+      <th>hour</th>
+      <th>latitude</th>
+      <th>longitude</th>
+      <th>pressurei</th>
+      <th>rain</th>
+      <th>tempi</th>
+      <th>wspdi</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>05-01-11</td>
+      <td>0</td>
+      <td>0</td>
+      <td>40.689945</td>
+      <td>-73.872564</td>
+      <td>30.24</td>
+      <td>0</td>
+      <td>52.0</td>
+      <td>8.1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>05-01-11</td>
+      <td>0</td>
+      <td>0</td>
+      <td>40.691320</td>
+      <td>-73.867135</td>
+      <td>30.24</td>
+      <td>0</td>
+      <td>52.0</td>
+      <td>8.1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>05-02-11</td>
+      <td>0</td>
+      <td>0</td>
+      <td>40.689945</td>
+      <td>-73.872564</td>
+      <td>30.32</td>
+      <td>0</td>
+      <td>48.9</td>
+      <td>6.9</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>05-02-11</td>
+      <td>0</td>
+      <td>0</td>
+      <td>40.691320</td>
+      <td>-73.867135</td>
+      <td>30.32</td>
+      <td>0</td>
+      <td>48.9</td>
+      <td>6.9</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>05-03-11</td>
+      <td>0</td>
+      <td>0</td>
+      <td>40.689945</td>
+      <td>-73.872564</td>
+      <td>30.14</td>
+      <td>0</td>
+      <td>54.0</td>
+      <td>3.5</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>05-03-11</td>
+      <td>0</td>
+      <td>0</td>
+      <td>40.691320</td>
+      <td>-73.867135</td>
+      <td>30.14</td>
+      <td>0</td>
+      <td>54.0</td>
+      <td>3.5</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>05-04-11</td>
+      <td>0</td>
+      <td>0</td>
+      <td>40.689945</td>
+      <td>-73.872564</td>
+      <td>29.98</td>
+      <td>0</td>
+      <td>57.2</td>
+      <td>15.0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>05-04-11</td>
+      <td>0</td>
+      <td>0</td>
+      <td>40.691320</td>
+      <td>-73.867135</td>
+      <td>29.98</td>
+      <td>0</td>
+      <td>57.2</td>
+      <td>15.0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>05-05-11</td>
+      <td>0</td>
+      <td>0</td>
+      <td>40.689945</td>
+      <td>-73.872564</td>
+      <td>30.01</td>
+      <td>0</td>
+      <td>48.9</td>
+      <td>15.0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>05-05-11</td>
+      <td>0</td>
+      <td>0</td>
+      <td>40.691320</td>
+      <td>-73.867135</td>
+      <td>30.01</td>
+      <td>0</td>
+      <td>48.9</td>
+      <td>15.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
