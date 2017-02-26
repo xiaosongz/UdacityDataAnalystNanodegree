@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>NaiveBayesMiniProject</title>
+<title>Untitled</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11746,109 +11746,6 @@ div#notebook {
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Naive-Bayes-MiniProject">Naive Bayes MiniProject<a class="anchor-link" href="#Naive-Bayes-MiniProject">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="ch">#!/usr/bin/python</span>
-
-<span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">    This is the code to accompany the Lesson 1 (Naive Bayes) mini-project. </span>
-
-<span class="sd">    Use a Naive Bayes Classifier to identify emails by their authors</span>
-<span class="sd">    </span>
-<span class="sd">    authors and labels:</span>
-<span class="sd">    Sara has label 0</span>
-<span class="sd">    Chris has label 1</span>
-<span class="sd">&quot;&quot;&quot;</span>
-    
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;ud-projects/tools/&quot;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">email_preprocess</span> <span class="kn">import</span> <span class="n">preprocess</span>
-
-
-<span class="c1">### features_train and features_test are the features for the training</span>
-<span class="c1">### and testing datasets, respectively</span>
-<span class="c1">### labels_train and labels_test are the corresponding item labels</span>
-<span class="n">features_train</span><span class="p">,</span> <span class="n">features_test</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">labels_test</span> <span class="o">=</span> <span class="n">preprocess</span><span class="p">()</span>
-
-
-
-
-<span class="c1">#########################################################</span>
-<span class="c1">### your code goes here ###</span>
-
-
-<span class="c1">#########################################################</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/usr/local/lib/python2.7/dist-packages/sklearn/cross_validation.py:44: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
-  &#34;This module will be removed in 0.20.&#34;, DeprecationWarning)
-</pre>
-</div>
-</div>
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_text output_error">
-<pre>
-
-<span class="ansi-red-fg">IOError</span>Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-1-e324e4d9050e&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">     20</span> <span class="ansi-red-fg">### and testing datasets, respectively</span>
-<span class="ansi-green-intense-fg ansi-bold">     21</span> <span class="ansi-red-fg">### labels_train and labels_test are the corresponding item labels</span>
-<span class="ansi-green-fg">---&gt; 22</span><span class="ansi-red-fg"> </span>features_train<span class="ansi-blue-fg">,</span> features_test<span class="ansi-blue-fg">,</span> labels_train<span class="ansi-blue-fg">,</span> labels_test <span class="ansi-blue-fg">=</span> preprocess<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     23</span> 
-<span class="ansi-green-intense-fg ansi-bold">     24</span> 
-
-<span class="ansi-green-fg">/home/xiaosongz/notebooks/Udacity Data Analyst/P5IdentifyFraudFromEnronEmail/ud-projects/tools/email_preprocess.py</span> in <span class="ansi-cyan-fg">preprocess</span><span class="ansi-blue-fg">(words_file, authors_file)</span>
-<span class="ansi-green-intense-fg ansi-bold">     30</span>     <span class="ansi-red-fg">### the words (features) and authors (labels), already largely preprocessed</span>
-<span class="ansi-green-intense-fg ansi-bold">     31</span>     <span class="ansi-red-fg">### this preprocessing will be repeated in the text learning mini-project</span>
-<span class="ansi-green-fg">---&gt; 32</span><span class="ansi-red-fg">     </span>authors_file_handler <span class="ansi-blue-fg">=</span> open<span class="ansi-blue-fg">(</span>authors_file<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#34;r&#34;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     33</span>     authors <span class="ansi-blue-fg">=</span> pickle<span class="ansi-blue-fg">.</span>load<span class="ansi-blue-fg">(</span>authors_file_handler<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     34</span>     authors_file_handler<span class="ansi-blue-fg">.</span>close<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-red-fg">IOError</span>: [Errno 2] No such file or directory: &#39;../tools/email_authors.pkl&#39;</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span> 
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
     </div>
   </div>
 </body>

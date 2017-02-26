@@ -11752,6 +11752,11 @@ div#notebook {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Naive-Bayes-MiniProject">Naive Bayes MiniProject<a class="anchor-link" href="#Naive-Bayes-MiniProject">&#182;</a></h2>
+<pre><code>"We will start by giving you a list of strings. Each string is the text of an email, which has undergone some basic preprocessing; we will then provide the code to split the dataset into training and testing sets. (In the next lessons you’ll learn how to do this preprocessing and splitting yourself, but for now we’ll give the code to you).
+
+One particular feature of Naive Bayes is that it’s a good algorithm for working with text classification. When dealing with text, it’s very common to treat each unique word as a feature, and since the typical person’s vocabulary is many thousands of words, this makes for a large number of features. The relative simplicity of the algorithm and the independent features assumption of Naive Bayes make it a strong performer for classifying texts. In this mini-project, you will download and install sklearn on your computer and use Naive Bayes to classify emails by author."</code></pre>
+<p>In this project I am using the Naive Bayes classifier from <em>sklearn</em> package to train an classifier using training dataset and checked the accuracy of this NB classifier using test dataset. The result show us the Naive Bayes classifer did a great work in this senario and gave out a very decent accuracy rate as $97.3\%$</p>
+
 </div>
 </div>
 </div>
@@ -11760,37 +11765,53 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="ch">#!/usr/bin/python</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
+#!/usr/bin/python
 
-<span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">    This is the code to accompany the Lesson 1 (Naive Bayes) mini-project. </span>
+&quot;&quot;&quot; 
+    This is the code to accompany the Lesson 1 (Naive Bayes) mini-project. 
 
-<span class="sd">    Use a Naive Bayes Classifier to identify emails by their authors</span>
-<span class="sd">    </span>
-<span class="sd">    authors and labels:</span>
-<span class="sd">    Sara has label 0</span>
-<span class="sd">    Chris has label 1</span>
-<span class="sd">&quot;&quot;&quot;</span>
+    Use a Naive Bayes Classifier to identify emails by their authors
     
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;ud-projects/tools/&quot;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">email_preprocess</span> <span class="kn">import</span> <span class="n">preprocess</span>
+    authors and labels:
+    Sara has label 0
+    Chris has label 1
+&quot;&quot;&quot;
+    
+import sys
+from time import time
+sys.path.append(&quot;../tools/&quot;)
+from email_preprocess import preprocess
 
 
-<span class="c1">### features_train and features_test are the features for the training</span>
-<span class="c1">### and testing datasets, respectively</span>
-<span class="c1">### labels_train and labels_test are the corresponding item labels</span>
-<span class="n">features_train</span><span class="p">,</span> <span class="n">features_test</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">labels_test</span> <span class="o">=</span> <span class="n">preprocess</span><span class="p">()</span>
+### features_train and features_test are the features for the training
+### and testing datasets, respectively
+### labels_train and labels_test are the corresponding item labels
+features_train, features_test, labels_train, labels_test = preprocess()
 
 
 
 
-<span class="c1">#########################################################</span>
-<span class="c1">### your code goes here ###</span>
+#########################################################
+### your code goes here ###
+from sklearn.naive_bayes import GaussianNB
+#rename NB classifier
+clf = GaussianNB()
+#training NB classifier
+clf.fit(features_train,labels_train)
+#prediction using fitted classifier with test set
+#timer Start
+t0 = time()
+pred = clf.predict(features_test)
+#timer end
+print &quot;training time:&quot;, round(time()-t0, 3), &quot;s&quot;
 
+#check the accuracy of this NB classifier
+from sklearn.metrics import accuracy_score
+accuracy = accuracy_score(pred,labels_test)
+print accuracy
 
-<span class="c1">#########################################################</span>
+#########################################################
 </pre></div>
 
 </div>
@@ -11810,25 +11831,14 @@ div#notebook {
 </div>
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_text output_error">
-<pre>
-
-<span class="ansi-red-fg">IOError</span>Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-1-e324e4d9050e&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">     20</span> <span class="ansi-red-fg">### and testing datasets, respectively</span>
-<span class="ansi-green-intense-fg ansi-bold">     21</span> <span class="ansi-red-fg">### labels_train and labels_test are the corresponding item labels</span>
-<span class="ansi-green-fg">---&gt; 22</span><span class="ansi-red-fg"> </span>features_train<span class="ansi-blue-fg">,</span> features_test<span class="ansi-blue-fg">,</span> labels_train<span class="ansi-blue-fg">,</span> labels_test <span class="ansi-blue-fg">=</span> preprocess<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     23</span> 
-<span class="ansi-green-intense-fg ansi-bold">     24</span> 
-
-<span class="ansi-green-fg">/home/xiaosongz/notebooks/Udacity Data Analyst/P5IdentifyFraudFromEnronEmail/ud-projects/tools/email_preprocess.py</span> in <span class="ansi-cyan-fg">preprocess</span><span class="ansi-blue-fg">(words_file, authors_file)</span>
-<span class="ansi-green-intense-fg ansi-bold">     30</span>     <span class="ansi-red-fg">### the words (features) and authors (labels), already largely preprocessed</span>
-<span class="ansi-green-intense-fg ansi-bold">     31</span>     <span class="ansi-red-fg">### this preprocessing will be repeated in the text learning mini-project</span>
-<span class="ansi-green-fg">---&gt; 32</span><span class="ansi-red-fg">     </span>authors_file_handler <span class="ansi-blue-fg">=</span> open<span class="ansi-blue-fg">(</span>authors_file<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#34;r&#34;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     33</span>     authors <span class="ansi-blue-fg">=</span> pickle<span class="ansi-blue-fg">.</span>load<span class="ansi-blue-fg">(</span>authors_file_handler<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     34</span>     authors_file_handler<span class="ansi-blue-fg">.</span>close<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-red-fg">IOError</span>: [Errno 2] No such file or directory: &#39;../tools/email_authors.pkl&#39;</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>no. of Chris training emails: 7936
+no. of Sara training emails: 7884
+training time: 0.212 s
+0.973265073948
+CPU times: user 5.44 s, sys: 1.91 s, total: 7.36 s
+Wall time: 7.44 s
+</pre>
 </div>
 </div>
 
