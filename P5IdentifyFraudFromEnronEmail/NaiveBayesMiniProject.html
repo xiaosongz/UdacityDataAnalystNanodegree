@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>Naive_bayes</title>
+<title>NaiveBayesMiniProject</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11751,89 +11751,82 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Naive-Bayes-in-SKLEARN">Naive Bayes in SKLEARN<a class="anchor-link" href="#Naive-Bayes-in-SKLEARN">&#182;</a></h2>
+<h2 id="Naive-Bayes-MiniProject">Naive Bayes MiniProject<a class="anchor-link" href="#Naive-Bayes-MiniProject">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">NBAccuracy</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">features_test</span><span class="p">,</span> <span class="n">labels_test</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot; compute the accuracy of your Naive Bayes classifier &quot;&quot;&quot;</span>
-    <span class="c1">### import the sklearn module for GaussianNB</span>
-    <span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="ch">#!/usr/bin/python</span>
 
-    <span class="c1">### create classifier</span>
-    <span class="n">clf</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
+<span class="sd">&quot;&quot;&quot; </span>
+<span class="sd">    This is the code to accompany the Lesson 1 (Naive Bayes) mini-project. </span>
 
-    <span class="c1">### fit the classifier on the training features and labels</span>
-    <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">)</span>
+<span class="sd">    Use a Naive Bayes Classifier to identify emails by their authors</span>
+<span class="sd">    </span>
+<span class="sd">    authors and labels:</span>
+<span class="sd">    Sara has label 0</span>
+<span class="sd">    Chris has label 1</span>
+<span class="sd">&quot;&quot;&quot;</span>
+    
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;../tools/&quot;</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">email_preprocess</span> <span class="k">import</span> <span class="n">preprocess</span>
 
-    <span class="c1">### use the trained classifier to predict labels for the test features</span>
-    <span class="n">pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features_test</span><span class="p">)</span><span class="c1">#TODO</span>
+
+<span class="c1">### features_train and features_test are the features for the training</span>
+<span class="c1">### and testing datasets, respectively</span>
+<span class="c1">### labels_train and labels_test are the corresponding item labels</span>
+<span class="n">features_train</span><span class="p">,</span> <span class="n">features_test</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">labels_test</span> <span class="o">=</span> <span class="n">preprocess</span><span class="p">()</span>
 
 
-    <span class="c1">### calculate and return the accuracy on the test data</span>
-    <span class="c1">### this is slightly different than the example, </span>
-    <span class="c1">### where we just print the accuracy</span>
-    <span class="c1">### you might need to import an sklearn module</span>
-    <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
-    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span><span class="n">labels_test</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">accuracy</span>
+
+
+<span class="c1">#########################################################</span>
+<span class="c1">### your code goes here ###</span>
+
+
+<span class="c1">#########################################################</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ImportError</span>                               Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-1-168cd417add7&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">     14</span> <span class="ansi-green-fg">from</span> time <span class="ansi-green-fg">import</span> time
+<span class="ansi-green-intense-fg ansi-bold">     15</span> sys<span class="ansi-blue-fg">.</span>path<span class="ansi-blue-fg">.</span>append<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#34;../tools/&#34;</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 16</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> email_preprocess <span class="ansi-green-fg">import</span> preprocess
+<span class="ansi-green-intense-fg ansi-bold">     17</span> 
+<span class="ansi-green-intense-fg ansi-bold">     18</span> 
+
+<span class="ansi-red-fg">ImportError</span>: No module named &#39;email_preprocess&#39;</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">class_vis</span> <span class="kn">import</span> <span class="n">prettyPicture</span>
-<span class="kn">from</span> <span class="nn">prep_terrain_data</span> <span class="kn">import</span> <span class="n">makeTerrainData</span>
-<span class="kn">from</span> <span class="nn">classify</span> <span class="kn">import</span> <span class="n">NBAccuracy</span>
-
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">pl</span>
-
-
-<span class="n">features_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">features_test</span><span class="p">,</span> <span class="n">labels_test</span> <span class="o">=</span> <span class="n">makeTerrainData</span><span class="p">()</span>
-
-<span class="k">def</span> <span class="nf">submitAccuracy</span><span class="p">():</span>
-    <span class="n">accuracy</span> <span class="o">=</span> <span class="n">NBAccuracy</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">features_test</span><span class="p">,</span> <span class="n">labels_test</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">accuracy</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Cancer-Test">Cancer Test<a class="anchor-link" href="#Cancer-Test">&#182;</a></h3><h4 id="Sensitivity">Sensitivity<a class="anchor-link" href="#Sensitivity">&#182;</a></h4><p>$p_c = $Test positve
-$p_t = $True positive</p>
-<p>$Sensitivity = P(C|P_{os})=\dfrac{p_c}{p_t}$</p>
-<p>Reminder of the question: the prior probability of cancer is 1%, and a sensitivity and specificity are 90%, what's the probability that someone with a positive cancer test actually has the disease?</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
 </div>
