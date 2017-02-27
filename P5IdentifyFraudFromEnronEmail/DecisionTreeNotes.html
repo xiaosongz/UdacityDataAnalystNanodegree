@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>NaiveBayesMiniProject</title>
+<title>DecisionTreeNotes</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11751,46 +11751,33 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Naive-Bayes-MiniProject">Naive Bayes MiniProject<a class="anchor-link" href="#Naive-Bayes-MiniProject">&#182;</a></h2>
+<h2 id="DecisionTreeNotes">DecisionTreeNotes<a class="anchor-link" href="#DecisionTreeNotes">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Formula-Of-Entropy">Formula Of Entropy<a class="anchor-link" href="#Formula-Of-Entropy">&#182;</a></h3><p>Some sources use other bases for the logarithm (for example, they might use log base 10 or the natural log, with a base of approx. 2.72)--those details can change the maximal value of entropy that you can get. In our case, where there are 2 classes, the log base 2 formula that we use will have a maximal value of 1.
+There is an error in the formula in the entropy written on this slide. <strong>There should be a negative (-) sign preceding the sum:</strong></p>
+$$Entropy = -\sum_{i=0}^n(p_i)\cdot\log_2({p_i})$$<p>In practice, when you use a decision tree, you will rarely have to deal with the details of the log base--the important takeaway here is that lower entropy points toward more organized data, and that a decision tree uses that as a way how to classify events.</p>
+<h3 id="Information-Gain">Information Gain<a class="anchor-link" href="#Information-Gain">&#182;</a></h3>$$InformationGain = Entropy(Parent) - [WeightedEverage]Entropy(Child)$$
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="ch">#!/usr/bin/python</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">log</span>
 
-<span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">    This is the code to accompany the Lesson 1 (Naive Bayes) mini-project. </span>
+<span class="n">p1</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">/</span><span class="mi">3</span> <span class="c1"># force the p1 to be assigned as a &quot;float type&quot;</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">p1</span>
 
-<span class="sd">    Use a Naive Bayes Classifier to identify emails by their authors</span>
-<span class="sd">    </span>
-<span class="sd">    authors and labels:</span>
-<span class="sd">    Sara has label 0</span>
-<span class="sd">    Chris has label 1</span>
-<span class="sd">&quot;&quot;&quot;</span>
-    
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;ud-projects/tools/&quot;</span><span class="p">)</span>
-<span class="kn">from</span> <span class="nn">email_preprocess</span> <span class="kn">import</span> <span class="n">preprocess</span>
-
-
-<span class="c1">### features_train and features_test are the features for the training</span>
-<span class="c1">### and testing datasets, respectively</span>
-<span class="c1">### labels_train and labels_test are the corresponding item labels</span>
-<span class="n">features_train</span><span class="p">,</span> <span class="n">features_test</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">labels_test</span> <span class="o">=</span> <span class="n">preprocess</span><span class="p">()</span>
-
-
-
-
-<span class="c1">#########################################################</span>
-<span class="c1">### your code goes here ###</span>
-
-
-<span class="c1">#########################################################</span>
+<span class="k">print</span> <span class="o">-</span><span class="n">p1</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="n">p2</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">p2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -11802,33 +11789,39 @@ div#notebook {
 
 
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/usr/local/lib/python2.7/dist-packages/sklearn/cross_validation.py:44: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
-  &#34;This module will be removed in 0.20.&#34;, DeprecationWarning)
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.918295834054
 </pre>
 </div>
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="o">-</span><span class="n">p2</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">p2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">Ec</span> <span class="o">=</span> <span class="o">-</span><span class="n">p1</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="n">p2</span><span class="o">*</span><span class="n">log</span><span class="p">(</span><span class="n">p2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span> <span class="mf">1.0</span><span class="o">-</span> <span class="mf">3.0</span><span class="o">/</span><span class="mi">4</span><span class="o">*</span><span class="n">Ec</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
 <div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_text output_error">
-<pre>
-
-<span class="ansi-red-fg">IOError</span>Traceback (most recent call last)
-<span class="ansi-green-fg">&lt;ipython-input-1-e324e4d9050e&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
-<span class="ansi-green-intense-fg ansi-bold">     20</span> <span class="ansi-red-fg">### and testing datasets, respectively</span>
-<span class="ansi-green-intense-fg ansi-bold">     21</span> <span class="ansi-red-fg">### labels_train and labels_test are the corresponding item labels</span>
-<span class="ansi-green-fg">---&gt; 22</span><span class="ansi-red-fg"> </span>features_train<span class="ansi-blue-fg">,</span> features_test<span class="ansi-blue-fg">,</span> labels_train<span class="ansi-blue-fg">,</span> labels_test <span class="ansi-blue-fg">=</span> preprocess<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     23</span> 
-<span class="ansi-green-intense-fg ansi-bold">     24</span> 
-
-<span class="ansi-green-fg">/home/xiaosongz/notebooks/Udacity Data Analyst/P5IdentifyFraudFromEnronEmail/ud-projects/tools/email_preprocess.py</span> in <span class="ansi-cyan-fg">preprocess</span><span class="ansi-blue-fg">(words_file, authors_file)</span>
-<span class="ansi-green-intense-fg ansi-bold">     30</span>     <span class="ansi-red-fg">### the words (features) and authors (labels), already largely preprocessed</span>
-<span class="ansi-green-intense-fg ansi-bold">     31</span>     <span class="ansi-red-fg">### this preprocessing will be repeated in the text learning mini-project</span>
-<span class="ansi-green-fg">---&gt; 32</span><span class="ansi-red-fg">     </span>authors_file_handler <span class="ansi-blue-fg">=</span> open<span class="ansi-blue-fg">(</span>authors_file<span class="ansi-blue-fg">,</span> <span class="ansi-blue-fg">&#34;r&#34;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     33</span>     authors <span class="ansi-blue-fg">=</span> pickle<span class="ansi-blue-fg">.</span>load<span class="ansi-blue-fg">(</span>authors_file_handler<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">     34</span>     authors_file_handler<span class="ansi-blue-fg">.</span>close<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
-
-<span class="ansi-red-fg">IOError</span>: [Errno 2] No such file or directory: &#39;../tools/email_authors.pkl&#39;</pre>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.528320833574
+0.311278124459
+</pre>
 </div>
 </div>
 
@@ -11841,7 +11834,135 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span> 
+<div class=" highlight hl-ipython2"><pre><span></span><span class="ch">#!/usr/bin/python</span>
+
+<span class="sd">&quot;&quot;&quot; lecture and example code for decision tree unit &quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">class_vis</span> <span class="kn">import</span> <span class="n">prettyPicture</span><span class="p">,</span> <span class="n">output_image</span>
+<span class="kn">from</span> <span class="nn">prep_terrain_data</span> <span class="kn">import</span> <span class="n">makeTerrainData</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">pl</span>
+<span class="kn">from</span> <span class="nn">classifyDT</span> <span class="kn">import</span> <span class="n">classify</span>
+
+<span class="n">features_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">features_test</span><span class="p">,</span> <span class="n">labels_test</span> <span class="o">=</span> <span class="n">makeTerrainData</span><span class="p">()</span>
+
+
+
+<span class="c1">### the classify() function in classifyDT is where thDe</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">classify</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">)</span>
+
+<span class="c1">#### grader code, do not modify below this line</span>
+
+<span class="n">prettyPicture</span><span class="p">(</span><span class="n">clf</span><span class="p">,</span> <span class="n">features_test</span><span class="p">,</span> <span class="n">labels_test</span><span class="p">)</span>
+<span class="n">output_image</span><span class="p">(</span><span class="s2">&quot;test.png&quot;</span><span class="p">,</span> <span class="s2">&quot;png&quot;</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;test.png&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">def</span> <span class="nf">classify</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">):</span>
+    
+    <span class="c1">### your code goes here--should return a trained decision tree classifer</span>
+    <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+    <span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+    <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span><span class="n">labels_train</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">clf</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">class_vis</span> <span class="kn">import</span> <span class="n">prettyPicture</span>
+<span class="kn">from</span> <span class="nn">prep_terrain_data</span> <span class="kn">import</span> <span class="n">makeTerrainData</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">pl</span>
+
+<span class="n">features_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">features_test</span><span class="p">,</span> <span class="n">labels_test</span> <span class="o">=</span> <span class="n">makeTerrainData</span><span class="p">()</span>
+<span class="c1">########################## DECISION TREE #################################</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+<span class="c1">#### your code goes here</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span><span class="n">labels_train</span><span class="p">)</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features_test</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+
+<span class="n">acc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span><span class="n">labels_test</span><span class="p">)</span> <span class="c1">### you fill this in!</span>
+<span class="c1">### be sure to compute the accuracy on the test set</span>
+
+
+    
+<span class="k">def</span> <span class="nf">submitAccuracies</span><span class="p">():</span>
+  <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;acc&quot;</span><span class="p">:</span><span class="nb">round</span><span class="p">(</span><span class="n">acc</span><span class="p">,</span><span class="mi">3</span><span class="p">)}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">class_vis</span> <span class="kn">import</span> <span class="n">prettyPicture</span>
+<span class="kn">from</span> <span class="nn">prep_terrain_data</span> <span class="kn">import</span> <span class="n">makeTerrainData</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">pl</span>
+
+<span class="n">features_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">features_test</span><span class="p">,</span> <span class="n">labels_test</span> <span class="o">=</span> <span class="n">makeTerrainData</span><span class="p">()</span>
+
+<span class="c1">########################## DECISION TREE #################################</span>
+
+
+<span class="c1">### your code goes here--now create 2 decision tree classifiers,</span>
+<span class="c1">### one with min_samples_split=2 and one with min_samples_split=50</span>
+<span class="c1">### compute the accuracies on the testing data and store</span>
+<span class="c1">### the accuracy numbers to acc_min_samples_split_2 and</span>
+<span class="c1">### acc_min_samples_split_50, respectively</span>
+
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">tree</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+
+<span class="c1">###  DecisionTreeClassifier with min_samples_split= 2</span>
+<span class="n">clf1</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">min_samples_split</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">clf1</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span><span class="n">labels_train</span><span class="p">)</span>
+<span class="n">pred1</span> <span class="o">=</span> <span class="n">clf1</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features_test</span><span class="p">)</span>
+<span class="n">acc_min_samples_split_2</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">pred1</span><span class="p">,</span><span class="n">labels_test</span><span class="p">)</span>
+
+<span class="c1">###  DecisionTreeClassifier with min_samples_split= 50</span>
+<span class="n">clf2</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">min_samples_split</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">clf2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span><span class="n">labels_train</span><span class="p">)</span>
+<span class="n">pred2</span> <span class="o">=</span> <span class="n">clf2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features_test</span><span class="p">)</span>
+<span class="n">acc_min_samples_split_50</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">pred2</span><span class="p">,</span><span class="n">labels_test</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">submitAccuracies</span><span class="p">():</span>
+  <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;acc_min_samples_split_2&quot;</span><span class="p">:</span><span class="nb">round</span><span class="p">(</span><span class="n">acc_min_samples_split_2</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span>
+          <span class="s2">&quot;acc_min_samples_split_50&quot;</span><span class="p">:</span><span class="nb">round</span><span class="p">(</span><span class="n">acc_min_samples_split_50</span><span class="p">,</span><span class="mi">3</span><span class="p">)}</span>
 </pre></div>
 
 </div>
