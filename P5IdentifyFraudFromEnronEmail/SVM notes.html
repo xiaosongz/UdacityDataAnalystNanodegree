@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>NaiveBayesMiniProject</title>
+<title>SVM notes</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11751,104 +11751,82 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Naive-Bayes-MiniProject">Naive Bayes MiniProject<a class="anchor-link" href="#Naive-Bayes-MiniProject">&#182;</a></h2>
-<pre><code>"We will start by giving you a list of strings. Each string is the text of an email, which has undergone some basic preprocessing; we will then provide the code to split the dataset into training and testing sets. (In the next lessons you’ll learn how to do this preprocessing and splitting yourself, but for now we’ll give the code to you).
+<h1 id="Support-Vector-Machine-(SVM)-Algorithm">Support Vector Machine (SVM) Algorithm<a class="anchor-link" href="#Support-Vector-Machine-(SVM)-Algorithm">&#182;</a></h1><p>Invented by a Russian scientist that can take input data and creat a line, plane or hyperplane that can best seperate the data.The plane that can best seprate the data can maximizes the distance to nearest points(Maximize margin).</p>
+<p>Robust is the key feature a SVM want to enhance.</p>
+<h4 id="SVM-will-first-make-sure-classification-correctness,-then-maximize-the-Margin!">SVM will first make sure classification correctness, then maximize the Margin!<a class="anchor-link" href="#SVM-will-first-make-sure-classification-correctness,-then-maximize-the-Margin!">&#182;</a></h4><p>Thus, outliers are very influencial and disturbing to the result.</p>
+<p>And SVM algorithm can make useful decision (result) even when single outlier exist(Tolerence for outliers).</p>
+<h4 id="SVM,-from-linear-seperation-plane-to-a-projected-non-linear-seperation-plane.">SVM, from linear seperation plane to a projected non-linear seperation plane.<a class="anchor-link" href="#SVM,-from-linear-seperation-plane-to-a-projected-non-linear-seperation-plane.">&#182;</a></h4><p><strong>Kernel Trick</strong> Turn low dimension not seperable problem to a higher dimension seperable problem.</p>
+<p>Different kernels can be specify when create SVC.</p>
+<p>SVM parameters:</p>
+<p>C : smoothness - a larger C will give you more correctly classified points, but will have a less linear boundary(curvy - caution! over fitting possible)</p>
+<p>Gamma: penalty?</p>
 
-One particular feature of Naive Bayes is that it’s a good algorithm for working with text classification. When dealing with text, it’s very common to treat each unique word as a feature, and since the typical person’s vocabulary is many thousands of words, this makes for a large number of features. The relative simplicity of the algorithm and the independent features assumption of Naive Bayes make it a strong performer for classifying texts. In this mini-project, you will download and install sklearn on your computer and use Naive Bayes to classify emails by author."</code></pre>
-<p>In this project I am using the Naive Bayes classifier from <em>sklearn</em> package to train an classifier using training dataset and checked the accuracy of this NB classifier using test dataset. The result show us the Naive Bayes classifer did a great work in this senario and gave out a very decent accuracy rate as $97.3\%$</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
-#!/usr/bin/python
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The kernel function can be any of the following:
+linear: $\langle x, x'\rangle$.
+polynomial: $(\gamma \langle x, x'\rangle + r)^d$. d is specified by keyword degree, r by coef0.
+rbf: $\exp{(-\gamma |x-x'|^2)}$. $\gamma $is specified by keyword gamma, must be greater than 0.
+sigmoid $(\tanh(\gamma \langle x,x'\rangle + r))$, where r is specified by coef0.
+Different kernels are specified by keyword kernel at initialization:</p>
 
-&quot;&quot;&quot; 
-    This is the code to accompany the Lesson 1 (Naive Bayes) mini-project. 
-
-    Use a Naive Bayes Classifier to identify emails by their authors
-    
-    authors and labels:
-    Sara has label 0
-    Chris has label 1
-&quot;&quot;&quot;
-    
-import sys
-from time import time
-sys.path.append(&quot;../tools/&quot;)
-from email_preprocess import preprocess
-
-
-### features_train and features_test are the features for the training
-### and testing datasets, respectively
-### labels_train and labels_test are the corresponding item labels
-features_train, features_test, labels_train, labels_test = preprocess()
-
-
-
-
-#########################################################
-### your code goes here ###
-from sklearn.naive_bayes import GaussianNB
-#rename NB classifier
-clf = GaussianNB()
-#training NB classifier
-#timer Start
-t0 = time()
-clf.fit(features_train,labels_train)
-#timer end
-print &quot;training time:&quot;, round(time()-t0, 3), &quot;s&quot;
-#prediction using fitted classifier with test set
-#timer Start
-t1 = time()
-pred = clf.predict(features_test)
-#timer end
-print &quot;Predicting time:&quot;, round(time()-t1, 3), &quot;s&quot;
-
-#check the accuracy of this NB classifier
-from sklearn.metrics import accuracy_score
-accuracy = accuracy_score(pred,labels_test)
-print accuracy
-
-#########################################################
-</pre></div>
+<pre><code>&gt;&gt;&gt;
+&gt;&gt;&gt; linear_svc = svm.SVC(kernel='linear')
+&gt;&gt;&gt; linear_svc.kernel
+'linear'
+&gt;&gt;&gt; rbf_svc = svm.SVC(kernel='rbf')
+&gt;&gt;&gt; rbf_svc.kernel
+'rbf'</code></pre>
 
 </div>
 </div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>no. of Chris training emails: 7936
-no. of Sara training emails: 7884
-training time: 1.625 s
-Predicting time: 0.243 s
-0.973265073948
-CPU times: user 5.13 s, sys: 1.59 s, total: 6.72 s
-Wall time: 6.73 s
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span> 
+<div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">class_vis</span> <span class="kn">import</span> <span class="n">prettyPicture</span>
+<span class="kn">from</span> <span class="nn">prep_terrain_data</span> <span class="kn">import</span> <span class="n">makeTerrainData</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">copy</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">pl</span>
+
+
+<span class="n">features_train</span><span class="p">,</span> <span class="n">labels_train</span><span class="p">,</span> <span class="n">features_test</span><span class="p">,</span> <span class="n">labels_test</span> <span class="o">=</span> <span class="n">makeTerrainData</span><span class="p">()</span>
+
+
+<span class="c1">########################## SVM #################################</span>
+<span class="c1">### we handle the import statement and SVC creation for you here</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+<span class="n">clf</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">)</span><span class="c1"># force SVC using linear kernel</span>
+
+<span class="c1">#### now your job is to fit the classifier</span>
+<span class="c1">#### using the training features/labels, and to</span>
+<span class="c1">#### make a set of predictions on the test data</span>
+
+<span class="c1">#training SVC using train dataset</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">features_train</span><span class="p">,</span><span class="n">labels_train</span><span class="p">)</span>
+
+<span class="c1">#### store your predictions in a list named pred</span>
+
+<span class="c1">#make prediction using trained clf</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features_test</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">accuracy_score</span>
+<span class="n">acc</span> <span class="o">=</span> <span class="n">accuracy_score</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">labels_test</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">submitAccuracy</span><span class="p">():</span>
+    <span class="k">return</span> <span class="n">acc</span>
 </pre></div>
 
 </div>

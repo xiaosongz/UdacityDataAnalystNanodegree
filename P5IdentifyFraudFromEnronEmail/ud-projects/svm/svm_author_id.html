@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
-<title>NaiveBayesMiniProject</title>
+<title>svm_author_id</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11751,29 +11751,34 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Naive-Bayes-MiniProject">Naive Bayes MiniProject<a class="anchor-link" href="#Naive-Bayes-MiniProject">&#182;</a></h2>
-<pre><code>"We will start by giving you a list of strings. Each string is the text of an email, which has undergone some basic preprocessing; we will then provide the code to split the dataset into training and testing sets. (In the next lessons you’ll learn how to do this preprocessing and splitting yourself, but for now we’ll give the code to you).
+<h2 id="Mini-Project---Using-SVM-to-predict-author-of-email">Mini Project - Using SVM to predict author of email<a class="anchor-link" href="#Mini-Project---Using-SVM-to-predict-author-of-email">&#182;</a></h2><p>svm_author_id</p>
 
-One particular feature of Naive Bayes is that it’s a good algorithm for working with text classification. When dealing with text, it’s very common to treat each unique word as a feature, and since the typical person’s vocabulary is many thousands of words, this makes for a large number of features. The relative simplicity of the algorithm and the independent features assumption of Naive Bayes make it a strong performer for classifying texts. In this mini-project, you will download and install sklearn on your computer and use Naive Bayes to classify emails by author."</code></pre>
-<p>In this project I am using the Naive Bayes classifier from <em>sklearn</em> package to train an classifier using training dataset and checked the accuracy of this NB classifier using test dataset. The result show us the Naive Bayes classifer did a great work in this senario and gave out a very decent accuracy rate as $97.3\%$</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Go to the svm directory to find the starter code (svm/svm_author_id.py).</p>
+<p>Import, create, train and make predictions with the sklearn SVC classifier. When creating the classifier, use a linear kernel (if you forget this step, you will be unpleasantly surprised by how long the classifier takes to train). What is the accuracy of the classifier?</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
 #!/usr/bin/python
 
 &quot;&quot;&quot; 
-    This is the code to accompany the Lesson 1 (Naive Bayes) mini-project. 
+    This is the code to accompany the Lesson 2 (SVM) mini-project.
 
-    Use a Naive Bayes Classifier to identify emails by their authors
-    
-    authors and labels:
+    Use a SVM to identify emails from the Enron corpus by their authors:    
     Sara has label 0
     Chris has label 1
 &quot;&quot;&quot;
@@ -11788,33 +11793,162 @@ from email_preprocess import preprocess
 ### and testing datasets, respectively
 ### labels_train and labels_test are the corresponding item labels
 features_train, features_test, labels_train, labels_test = preprocess()
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
 
 
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/usr/local/lib/python2.7/dist-packages/sklearn/cross_validation.py:44: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
+  &#34;This module will be removed in 0.20.&#34;, DeprecationWarning)
+</pre>
+</div>
+</div>
 
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>no. of Chris training emails: 7936
+no. of Sara training emails: 7884
+CPU times: user 4.5 s, sys: 908 ms, total: 5.41 s
+Wall time: 5.32 s
+</pre>
+</div>
+</div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
 #########################################################
 ### your code goes here ###
-from sklearn.naive_bayes import GaussianNB
-#rename NB classifier
-clf = GaussianNB()
-#training NB classifier
-#timer Start
-t0 = time()
+from sklearn.svm import SVC
+clf = SVC(kernel=&#39;linear&#39;)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CPU times: user 0 ns, sys: 0 ns, total: 0 ns
+Wall time: 220 µs
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Place timing code around the fit and predict functions, like you did in the Naive Bayes mini-project. How do the training and prediction times compare to Naive Bayes?</p>
+
+<pre><code>Much slower than Naive Bayes!!!</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
+#training SVM classifier, seems very slow. Could try to reduce the size of trian dataset.
 clf.fit(features_train,labels_train)
-#timer end
-print &quot;training time:&quot;, round(time()-t0, 3), &quot;s&quot;
-#prediction using fitted classifier with test set
-#timer Start
-t1 = time()
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CPU times: user 22min 43s, sys: 2.12 s, total: 22min 45s
+Wall time: 22min 48s
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma=&#39;auto&#39;, kernel=&#39;rbf&#39;,
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
 pred = clf.predict(features_test)
-#timer end
-print &quot;Predicting time:&quot;, round(time()-t1, 3), &quot;s&quot;
+</pre></div>
 
-#check the accuracy of this NB classifier
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CPU times: user 2min 25s, sys: 4 ms, total: 2min 25s
+Wall time: 2min 25s
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
 from sklearn.metrics import accuracy_score
-accuracy = accuracy_score(pred,labels_test)
-print accuracy
-
+acc = accuracy_score(pred,labels_test)
+print acc
 #########################################################
 </pre></div>
 
@@ -11828,13 +11962,9 @@ print accuracy
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>no. of Chris training emails: 7936
-no. of Sara training emails: 7884
-training time: 1.625 s
-Predicting time: 0.243 s
-0.973265073948
-CPU times: user 5.13 s, sys: 1.59 s, total: 6.72 s
-Wall time: 6.73 s
+<pre>0.492036405006
+CPU times: user 0 ns, sys: 0 ns, total: 0 ns
+Wall time: 2.19 ms
 </pre>
 </div>
 </div>
@@ -11845,16 +11975,571 @@ Wall time: 6.73 s
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span> 
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1">##reduce the training dataset by 99%</span>
+<span class="n">features_train_r</span> <span class="o">=</span> <span class="n">features_train</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">features_train</span><span class="p">)</span><span class="o">/</span><span class="mi">100</span><span class="p">]</span> 
+<span class="n">labels_train_r</span> <span class="o">=</span> <span class="n">labels_train</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">labels_train</span><span class="p">)</span><span class="o">/</span><span class="mi">100</span><span class="p">]</span> 
 </pre></div>
 
 </div>
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
+clf.fit(features_train_r,labels_train_r)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CPU times: user 124 ms, sys: 4 ms, total: 128 ms
+Wall time: 131 ms
+</pre>
+</div>
+</div>
+
+<div class="output_area"><div class="prompt output_prompt">Out[38]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>SVC(C=10000.0, cache_size=200, class_weight=None, coef0=0.0,
+  decision_function_shape=None, degree=3, gamma=&#39;auto&#39;, kernel=&#39;rbf&#39;,
+  max_iter=-1, probability=False, random_state=None, shrinking=True,
+  tol=0.001, verbose=False)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
+pred = clf.predict(features_test)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CPU times: user 1.27 s, sys: 0 ns, total: 1.27 s
+Wall time: 1.27 s
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
+from sklearn.metrics import accuracy_score
+acc = accuracy_score(pred,labels_test)
+print acc
+#########################################################
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.884527872582
+CPU times: user 0 ns, sys: 0 ns, total: 0 ns
+Wall time: 1.51 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Speed-/-Accuracy-trade-off">Speed / Accuracy trade-off<a class="anchor-link" href="#Speed-/-Accuracy-trade-off">&#182;</a></h4><p>If speed is a major consideration (and for many real-time machine learning applications, it certainly is) then you may want to sacrifice a bit of accuracy if it means you can train/predict faster. Which of these are applications where you can imagine a very quick-running algorithm is especially important?</p>
+<ul>
+<li>predicting the author of an email</li>
+<li><strong>flagging credit card fraud, and blocking a transaction before it goes through</strong></li>
+<li><strong>voice recognition, like Siri</strong></li>
+</ul>
+<h4 id="Deploy-an-RBF-Kernel">Deploy an RBF Kernel<a class="anchor-link" href="#Deploy-an-RBF-Kernel">&#182;</a></h4><p>Keep the training set slice code from the last quiz, so that you are still training on only 1% of the full training set. Change the kernel of your SVM to “rbf”. What’s the accuracy now, with this more complex kernel?
+START QUIZ</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
+#Change the kernel of your SVM to “rbf”. What’s the accuracy now, with this more complex kernel?
+
+from sklearn.svm import SVC
+clf = SVC(kernel=&#39;rbf&#39;)
+clf.fit(features_train_r,labels_train_r)
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>CPU times: user 128 ms, sys: 8 ms, total: 136 ms
+Wall time: 134 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">features_test</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
+from sklearn.metrics import accuracy_score
+acc = accuracy_score(pred,labels_test)
+print acc
+#########################################################
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.616040955631
+CPU times: user 4 ms, sys: 0 ns, total: 4 ms
+Wall time: 1.29 ms
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Keep the training set size and rbf kernel from the last quiz, but try several values of C (say, 10.0, 100., 1000., and 10000.). Which one gives the best accuracy?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
+#Change the kernel of your SVM to “rbf”. What’s the accuracy now, with this more complex kernel?
+
+from sklearn.svm import SVC
+clf = SVC(kernel=&#39;rbf&#39;, C= 10.0)
+clf.fit(features_train_r,labels_train_r)
+pred = clf.predict(features_test)
+from sklearn.metrics import accuracy_score
+acc = accuracy_score(pred,labels_test)
+print acc
+#########################################################
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.616040955631
+CPU times: user 1.5 s, sys: 0 ns, total: 1.5 s
+Wall time: 1.5 s
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
+#Change the kernel of your SVM to “rbf”. What’s the accuracy now, with this more complex kernel?
+
+from sklearn.svm import SVC
+clf = SVC(kernel=&#39;rbf&#39;, C= 100.0)
+clf.fit(features_train_r,labels_train_r)
+pred = clf.predict(features_test)
+from sklearn.metrics import accuracy_score
+acc = accuracy_score(pred,labels_test)
+print acc
+#########################################################
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.616040955631
+CPU times: user 1.49 s, sys: 4 ms, total: 1.5 s
+Wall time: 1.49 s
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
+#Change the kernel of your SVM to “rbf”. What’s the accuracy now, with this more complex kernel?
+
+from sklearn.svm import SVC
+clf = SVC(kernel=&#39;rbf&#39;, C= 1000.0)
+clf.fit(features_train_r,labels_train_r)
+pred = clf.predict(features_test)
+from sklearn.metrics import accuracy_score
+acc = accuracy_score(pred,labels_test)
+print acc
+#########################################################
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.821387940842
+CPU times: user 1.44 s, sys: 0 ns, total: 1.44 s
+Wall time: 1.44 s
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
+#Change the kernel of your SVM to “rbf”. What’s the accuracy now, with this more complex kernel?
+
+from sklearn.svm import SVC
+clf = SVC(kernel=&#39;rbf&#39;, C= 10000.0)
+clf.fit(features_train_r,labels_train_r)
+pred = clf.predict(features_test)
+from sklearn.metrics import accuracy_score
+acc = accuracy_score(pred,labels_test)
+print acc
+#########################################################
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.892491467577
+CPU times: user 1.24 s, sys: 0 ns, total: 1.24 s
+Wall time: 1.24 s
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Once you've optimized the C value for your RBF kernel, what accuracy does it give? Does this C value correspond to a simpler or more complex decision boundary?</p>
+<p>(If you're not sure about the complexity, go back a few videos to the "SVM C Parameter" part of the lesson. The result that you found there is also applicable here, even though it's now much harder or even impossible to draw the decision boundary in a simple scatterplot.)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now that you’ve optimized C for the RBF kernel, go back to using the full training set. In general, having a larger training set will improve the performance of your algorithm, so (by tuning C and training on a large dataset) we should get a fairly optimized result. What is the accuracy of the optimized SVM?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
+#Change the kernel of your SVM to “rbf”. What’s the accuracy now, with this more complex kernel?
+#using full training dataset with C =10000.0
+from sklearn.svm import SVC
+clff = SVC(kernel=&#39;rbf&#39;, C= 10000.0)
+clff.fit(features_train,labels_train)
+predf = clff.predict(features_test)
+from sklearn.metrics import accuracy_score
+acc = accuracy_score(predf,labels_test)
+print acc
+#########################################################
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.892491467577
+CPU times: user 2min 39s, sys: 928 ms, total: 2min 40s
+Wall time: 2min 40s
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Extracting-Predictions-from-an-SVM">Extracting Predictions from an SVM<a class="anchor-link" href="#Extracting-Predictions-from-an-SVM">&#182;</a></h4><p>What class does your SVM (0 or 1, corresponding to Sara and Chris respectively) predict for element 10 of the test set? The 26th? The 50th? (Use the RBF kernel, C=10000, and 1% of the training set. Normally you'd get the best results using the full training set, but we found that using 1% sped up the computation considerably and did not change our results--so feel free to use that shortcut here.)</p>
+<p>And just to be clear, the data point numbers that we give here (10, 26, 50) assume a zero-indexed list. So the correct answer for element #100 would be found using something like answer=predictions[100]</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
+#Change the kernel of your SVM to “rbf”. What’s the accuracy now, with this more complex kernel?
+
+from sklearn.svm import SVC
+clf = SVC(kernel=&#39;rbf&#39;, C= 10000.0)
+clf.fit(features_train_r,labels_train_r)
+pred = clf.predict(features_test)
+from sklearn.metrics import accuracy_score
+acc = accuracy_score(pred,labels_test)
+print acc
+#########################################################
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.892491467577
+CPU times: user 1.25 s, sys: 20 ms, total: 1.27 s
+Wall time: 1.27 s
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">print</span> <span class="n">pred</span><span class="p">[</span><span class="mi">10</span><span class="p">],</span> <span class="n">pred</span><span class="p">[</span><span class="mi">26</span><span class="p">],</span><span class="n">pred</span><span class="p">[</span><span class="mi">50</span><span class="p">]</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1 0 1
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Just like the SVM, you are over 99% correct!  (Actually, on this one, you're 100% correct)</p>
+<h4 id="How-Many-Chris-Emails-Predicted?">How Many Chris Emails Predicted?<a class="anchor-link" href="#How-Many-Chris-Emails-Predicted?">&#182;</a></h4><p>There are over 1700 test events--how many are predicted to be in the “Chris” (1) class? (Use the RBF kernel, C=10000., and the full training set.)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="n">predf</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt output_prompt">Out[37]:</div>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>877</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Hopefully it’s becoming clearer what Sebastian meant when he said Naive Bayes is great for text--it’s faster and generally gives better performance than an SVM for this particular problem. Of course, there are plenty of other problems where an SVM might work better. Knowing which one to try when you’re tackling a problem for the first time is part of the art and science of machine learning. In addition to picking your algorithm, depending on which one you try, there are parameter tunes to worry about as well, and the possibility of overfitting (especially if you don’t have lots of training data).</p>
+<p>Our general suggestion is to try a few different algorithms for each problem. Tuning the parameters can be a lot of work, but just sit tight for now--toward the end of the class we will introduce you to <strong>GridCV</strong>, a great sklearn tool that can find an optimal parameter tune almost automatically.</p>
+
+</div>
+</div>
 </div>
     </div>
   </div>
